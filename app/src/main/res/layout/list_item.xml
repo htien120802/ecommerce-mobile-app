@@ -4,6 +4,9 @@
         <variable
             name="product"
             type="com.example.ecommerce_mobile_app.model.Product" />
+        <variable
+            name="fragmentStoreViewModel"
+            type="com.example.ecommerce_mobile_app.viewmodel.FragmentStoreViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgItemList"
                 android:layout_width="170dp"
                 android:layout_height="170dp"
@@ -28,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/itemList"
-                app:setImage="@{product.mainImage}" />
+                app:setImage="@{product.mainImagePath}"/>
 
             <TextView
                 android:id="@+id/tvNameItemList"
@@ -36,12 +39,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="@{product.shortName}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgItemList" />
+                app:layout_constraintTop_toBottomOf="@+id/imgItemList"
+                android:text="@{product.shortName}"/>
 
             <TextView
                 android:id="@+id/tvInfoItemList"
@@ -49,12 +52,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins_extralight"
-                android:text="@{product.mobileName}"
                 android:textColor="@color/black"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvNameItemList" />
+                app:layout_constraintTop_toBottomOf="@+id/tvNameItemList"
+                android:text="@{product.mobileName}"/>
 
             <TextView
                 android:id="@+id/tvPriceItemList"
@@ -62,11 +65,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="@{product.price}"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvInfoItemList" />
+                app:layout_constraintTop_toBottomOf="@+id/tvInfoItemList"
+                android:text="@{product.price + @string/currency}"/>
 
             <ImageView
                 android:id="@+id/imageView2"

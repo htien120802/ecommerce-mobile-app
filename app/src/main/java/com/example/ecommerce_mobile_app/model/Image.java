@@ -1,17 +1,31 @@
 package com.example.ecommerce_mobile_app.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-public class Image implements Serializable {
-    private int id;
+public class Image {
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("imagePath")
+    @Expose
     private String imagePath;
 
-    public int getId() {
+    public Image(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

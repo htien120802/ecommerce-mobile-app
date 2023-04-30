@@ -1,10 +1,12 @@
 package com.example.ecommerce_mobile_app.view.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,29 +33,12 @@ import retrofit2.Response;
 
 public class StoreFragment extends Fragment {
     FragmentStoreBinding fragmentStoreBinding;
-    List<Category> mListCategories;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentStoreBinding = FragmentStoreBinding.inflate(inflater,container,false);
-        RetrofitClient.getInstance().getProducts().enqueue(new Callback<List<Product>>() {
-            @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                if (response.isSuccessful()){
-                    List<Product> products = response.body();
-                    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
-                    fragmentStoreBinding.rvListItem.setLayoutManager(gridLayoutManager);
-                    ProductAdapter productAdapter = new ProductAdapter(products);
-                    fragmentStoreBinding.rvListItem.setAdapter(productAdapter);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
-
-            }
-        });
         return fragmentStoreBinding.getRoot();
     }
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.databinding.ActivityMainBinding;

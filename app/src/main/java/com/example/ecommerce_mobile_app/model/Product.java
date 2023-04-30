@@ -1,35 +1,78 @@
 package com.example.ecommerce_mobile_app.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class Product implements Serializable {
-    private int id;
+public class Product {
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("mobileName")
+    @Expose
     private String mobileName;
+    @SerializedName("mobileDescription")
+    @Expose
     private String mobileDescription;
-    private boolean enabled;
-    private boolean inStock;
-    private int price;
-    private int discountPercent;
-    private int length;
-    private int width;
-    private int height;
-    private int weight;
+    @SerializedName("enabled")
+    @Expose
+    private Boolean enabled;
+    @SerializedName("inStock")
+    @Expose
+    private Boolean inStock;
+    @SerializedName("price")
+    @Expose
+    private Float price;
+    @SerializedName("discountPercent")
+    @Expose
+    private Integer discountPercent;
+    @SerializedName("length")
+    @Expose
+    private Integer length;
+    @SerializedName("width")
+    @Expose
+    private Integer width;
+    @SerializedName("height")
+    @Expose
+    private Integer height;
+    @SerializedName("weight")
+    @Expose
+    private Integer weight;
+    @SerializedName("mainImage")
+    @Expose
     private String mainImage;
+    @SerializedName("category")
+    @Expose
     private Category category;
+    @SerializedName("images")
+    @Expose
     private List<Image> images;
-    private int reviewCount;
-    private int averageRating;
+    @SerializedName("reviewCount")
+    @Expose
+    private Integer reviewCount;
+    @SerializedName("averageRating")
+    @Expose
+    private Integer averageRating;
+    @SerializedName("mainImagePath")
+    @Expose
     private String mainImagePath;
+    @SerializedName("shortName")
+    @Expose
     private String shortName;
-    private int discountPrice;
+    @SerializedName("discountPrice")
+    @Expose
+    private Integer discountPrice;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,67 +100,67 @@ public class Product implements Serializable {
         this.mobileDescription = mobileDescription;
     }
 
-    public boolean isEnabled() {
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
-    public boolean isInStock() {
+    public Boolean getInStock() {
         return inStock;
     }
 
-    public void setInStock(boolean inStock) {
+    public void setInStock(Boolean inStock) {
         this.inStock = inStock;
     }
 
-    public int getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
-    public int getDiscountPercent() {
+    public Integer getDiscountPercent() {
         return discountPercent;
     }
 
-    public void setDiscountPercent(int discountPercent) {
+    public void setDiscountPercent(Integer discountPercent) {
         this.discountPercent = discountPercent;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(Integer length) {
         this.length = length;
     }
 
-    public int getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public Integer getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(Integer weight) {
         this.weight = weight;
     }
 
@@ -145,19 +188,19 @@ public class Product implements Serializable {
         this.images = images;
     }
 
-    public int getReviewCount() {
+    public Integer getReviewCount() {
         return reviewCount;
     }
 
-    public void setReviewCount(int reviewCount) {
+    public void setReviewCount(Integer reviewCount) {
         this.reviewCount = reviewCount;
     }
 
-    public int getAverageRating() {
+    public Integer getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(int averageRating) {
+    public void setAverageRating(Integer averageRating) {
         this.averageRating = averageRating;
     }
 
@@ -177,11 +220,11 @@ public class Product implements Serializable {
         this.shortName = shortName;
     }
 
-    public int getDiscountPrice() {
+    public Integer getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(int discountPrice) {
+    public void setDiscountPrice(Integer discountPrice) {
         this.discountPrice = discountPrice;
     }
 }
