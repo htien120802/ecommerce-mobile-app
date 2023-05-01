@@ -1,12 +1,30 @@
 package com.example.ecommerce_mobile_app.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
-public class Category implements Serializable {
-    private int id;
+public class Category {
+
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
     private String name;
-    private boolean enabled;
+    @SerializedName("image")
+    @Expose
+    private String image;
+    @SerializedName("enabled")
+    @Expose
+    private Boolean enabled;
+    @SerializedName("allParentIds")
+    @Expose
     private String allParentIds;
+    @SerializedName("imagePath")
+    @Expose
     private String imagePath;
 
     public Category(int id, String name) {
@@ -14,11 +32,11 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -30,11 +48,19 @@ public class Category implements Serializable {
         this.name = name;
     }
 
-    public boolean isEnabled() {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
