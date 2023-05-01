@@ -12,7 +12,7 @@ import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityItemDetailsBinding;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
-import com.example.ecommerce_mobile_app.viewmodel.ProductDetailActivityViewModel;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         activityItemDetailsBinding = ActivityItemDetailsBinding.inflate(getLayoutInflater());
         Bundle bundle = getIntent().getExtras();
         id = (int) bundle.getSerializable("product_id");
-        Log.e("AFTER",id + "");
         callAPI();
 
         activityItemDetailsBinding.btnBack.setOnClickListener(new View.OnClickListener() {
