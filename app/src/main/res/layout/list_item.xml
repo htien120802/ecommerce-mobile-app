@@ -3,10 +3,7 @@
     <data>
         <variable
             name="product"
-            type="com.example.ecommerce_mobile_app.model.Product" />
-        <variable
-            name="fragmentStoreViewModel"
-            type="com.example.ecommerce_mobile_app.viewmodel.FragmentStoreViewModel" />
+            type="com.example.ecommerce_mobile_app.model.Product" />/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

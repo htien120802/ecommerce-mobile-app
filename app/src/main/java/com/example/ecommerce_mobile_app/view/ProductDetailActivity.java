@@ -1,5 +1,6 @@
 package com.example.ecommerce_mobile_app.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.util.Log;
@@ -12,7 +13,7 @@ import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityItemDetailsBinding;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
-import com.example.ecommerce_mobile_app.viewmodel.ProductDetailActivityViewModel;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,24 @@ public class ProductDetailActivity extends AppCompatActivity {
         activityItemDetailsBinding = ActivityItemDetailsBinding.inflate(getLayoutInflater());
         Bundle bundle = getIntent().getExtras();
         id = (int) bundle.getSerializable("product_id");
-        Log.e("AFTER",id + "");
         callAPI();
 
         activityItemDetailsBinding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ProductDetailActivity.super.onBackPressed();
+            }
+        });
+
+        activityItemDetailsBinding.btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProductDetailActivity.this,MainActivity.class);
+                bundle.clear();
+                bundle.putSerializable("change_to","cart");
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
             }
         });
         setContentView(activityItemDetailsBinding.getRoot());

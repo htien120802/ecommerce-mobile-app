@@ -25,10 +25,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     private Context mContext;
     private int lastPosition = 0;
     int row_index = 0;
+    private IOnItemClickListener onItemClickListener;
+    public interface IOnItemClickListener {
+        public void onItemClickListener(Category category);
+    }
 
-    public CategoryAdapter(List<Category> mListCategories, Context context) {
+    public CategoryAdapter(List<Category> mListCategories, Context context, IOnItemClickListener onItemClickListener) {
         this.mListCategories = mListCategories;
         this.mContext = context;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -48,6 +53,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.listCategoryBinding.btnCategoryStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                onItemClickListener.onItemClickListener(category);
                 row_index = position;
                 notifyDataSetChanged();
             }
