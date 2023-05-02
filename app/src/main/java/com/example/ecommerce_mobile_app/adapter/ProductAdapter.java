@@ -55,7 +55,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             public void onClick(View view) {
                 Intent intent = new Intent(context,ProductDetailActivity.class);
                 Bundle bundle = new Bundle();
-                Log.e("CLICK",product.getId().toString());
                 bundle.putSerializable("product_id",product.getId());
                 intent.putExtras(bundle);
                 context.startActivity(intent);

@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding activityMainBinding;
     Fragment fragment=null;
     ChipNavigationBar chipNavigationBar;
+    String change_to = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,27 +27,35 @@ public class MainActivity extends AppCompatActivity {
         chipNavigationBar = activityMainBinding.NavigationBar;
         chipNavigationBar.setItemSelected(R.id.home, true);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
-
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            change_to = bundle.getSerializable("change_to").toString();
+            if (change_to.equals("cart"))
+                changeFragment(R.id.cart);
+        }
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int i) {
-                switch (i)
-                {
-                    case R.id.home:
-                        fragment = new HomeFragment();
-                        break;
-                    case R.id.store:
-                        fragment = new StoreFragment();
-                        break;
-                    case R.id.cart:
-                        fragment = new CartFragment();
-                        break;
-                }
-
-                if (fragment != null) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
-                }
+                changeFragment(i);
             }
         });
+    }
+    public void changeFragment(int i){
+        switch (i)
+        {
+            case R.id.home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.store:
+                fragment = new StoreFragment();
+                break;
+            case R.id.cart:
+                fragment = new CartFragment();
+                break;
+        }
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+            chipNavigationBar.setItemSelected(i,true);
+        }
     }
 }
