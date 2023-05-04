@@ -22,7 +22,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/LayoutHeaderProfile"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="80dp"
                     android:layout_marginStart="25dp"
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="25dp"
@@ -35,8 +35,8 @@
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/shapeableImageView2"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/avatarhome1"
@@ -50,11 +50,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="28dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="14dp"
                         android:fontFamily="@font/poppins_bold"
                         android:text="Ba Loc"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         app:layout_constraintStart_toEndOf="@+id/shapeableImageView2"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,6 +66,7 @@
                         android:fontFamily="@font/poppins_extralight"
                         android:text="buibaloc@gmail.com"
                         android:textColor="@color/black"
+                        android:textSize="14sp"
                         app:layout_constraintStart_toEndOf="@+id/shapeableImageView2"
                         app:layout_constraintTop_toBottomOf="@+id/tvNameProfile" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
