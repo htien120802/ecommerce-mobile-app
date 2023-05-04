@@ -30,13 +30,18 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
     private List<Product> mListProducts;
     private List<Product> mOldListProducts;
-    private boolean keySearch = false;
-    private boolean categoryFilter = false;
+
     private Context context;
-    public ProductAdapter(List<Product> mListProducts, Context context) {
+
+    public void setmListProducts(List<Product> mListProducts) {
         this.mListProducts = mListProducts;
-        this.context = context;
         this.mOldListProducts = mListProducts;
+        notifyDataSetChanged();
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+        notifyDataSetChanged();
     }
 
     @NonNull

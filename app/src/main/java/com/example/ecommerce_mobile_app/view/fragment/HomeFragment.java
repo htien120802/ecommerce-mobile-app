@@ -2,6 +2,8 @@ package com.example.ecommerce_mobile_app.view.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ecommerce_mobile_app.AsyncTask.SetHomeProductAsyncTask;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.ProductAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
@@ -28,15 +31,14 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     FragmentHomeBinding fragmentHomeBinding;
     RecyclerView rcvNew, rcvPopular;
-    ProductAdapter adapterNew, adapterPopular;
+    ProductAdapter adapterNew = new ProductAdapter(), adapterPopular = new ProductAdapter();
     List<Product> mListProducts;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater,container,false);
-        rcvNew = fragmentHomeBinding.rvNewArrivalsHome;
-        rcvPopular = fragmentHomeBinding.rvPopularHome;
+
         setListProducts();
         fragmentHomeBinding.tvViewAllNew.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +55,15 @@ public class HomeFragment extends Fragment {
         });
         return fragmentHomeBinding.getRoot();
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     public void setListProducts(){
+        rcvNew = fragmentHomeBinding.rvNewArrivalsHome;
+        rcvPopular = fragmentHomeBinding.rvPopularHome;
         RetrofitClient.getInstance().getProducts().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -68,13 +78,16 @@ public class HomeFragment extends Fragment {
                                 popularProducts.set(j,temp.get(i));
                                 break;
                             }
-                    adapterPopular = new ProductAdapter(popularProducts,getContext());
+
+                    adapterPopular.setmListProducts(popularProducts);
+                    adapterPopular.setContext(getContext());
                     GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getContext(),2);
                     rcvPopular.setLayoutManager(gridLayoutManager1);
                     rcvPopular.setAdapter(adapterPopular);
 
                     List<Product> newProducts = mListProducts.subList(mListProducts.size()-4,mListProducts.size());
-                    adapterNew = new ProductAdapter(newProducts,getContext());
+                    adapterNew.setmListProducts(newProducts);
+                    adapterNew.setContext(getContext());
                     GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(),2);
                     rcvNew.setLayoutManager(gridLayoutManager2);
                     rcvNew.setAdapter(adapterNew);
@@ -90,4 +103,5 @@ public class HomeFragment extends Fragment {
 
 
     }
+
 }

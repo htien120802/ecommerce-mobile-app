@@ -1,78 +1,42 @@
 package com.example.ecommerce_mobile_app.model;
 
+import android.provider.ContactsContract;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
-public class Product {
-    @SerializedName("id")
-    @Expose
-    private Integer id;
-    @SerializedName("name")
-    @Expose
+public class Product implements Serializable{
+    private int id;
     private String name;
-    @SerializedName("mobileName")
-    @Expose
-    private String mobileName;
-    @SerializedName("mobileDescription")
-    @Expose
-    private String mobileDescription;
-    @SerializedName("enabled")
-    @Expose
-    private Boolean enabled;
-    @SerializedName("inStock")
-    @Expose
-    private Boolean inStock;
-    @SerializedName("price")
-    @Expose
-    private Float price;
-    @SerializedName("discountPercent")
-    @Expose
-    private Integer discountPercent;
-    @SerializedName("length")
-    @Expose
-    private Integer length;
-    @SerializedName("width")
-    @Expose
-    private Integer width;
-    @SerializedName("height")
-    @Expose
-    private Integer height;
-    @SerializedName("weight")
-    @Expose
-    private Integer weight;
-    @SerializedName("mainImage")
-    @Expose
-    private String mainImage;
-    @SerializedName("category")
-    @Expose
-    private Category category;
-    @SerializedName("images")
-    @Expose
-    private List<Image> images;
-    @SerializedName("reviewCount")
-    @Expose
-    private Integer reviewCount;
-    @SerializedName("averageRating")
-    @Expose
-    private Integer averageRating;
-    @SerializedName("mainImagePath")
-    @Expose
-    private String mainImagePath;
-    @SerializedName("shortName")
-    @Expose
     private String shortName;
-    @SerializedName("discountPrice")
-    @Expose
-    private Integer discountPrice;
+    private String mobileName;
+    private String mobileDescription;
+    private boolean enabled;
+    private boolean inStock;
+    private int quantity;
+    private float price;
+    private float discountPercent;
+//    private float length;
+//    private float width;
+//    private float height;
+//    private float weight;
+    private Category category;
+    private List<Image> images;
+    private List<Description> details;
+    private int reviewCount;
+    private int averageRating;
+    private String mainImagePath;
+    private float discountPrice;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -82,6 +46,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
     public String getMobileName() {
@@ -100,76 +72,44 @@ public class Product {
         this.mobileDescription = mobileDescription;
     }
 
-    public Boolean getEnabled() {
+    public boolean isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(Boolean enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
-    public Boolean getInStock() {
+    public boolean isInStock() {
         return inStock;
     }
 
-    public void setInStock(Boolean inStock) {
+    public void setInStock(boolean inStock) {
         this.inStock = inStock;
     }
 
-    public Float getPrice() {
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public Integer getDiscountPercent() {
+    public float getDiscountPercent() {
         return discountPercent;
     }
 
-    public void setDiscountPercent(Integer discountPercent) {
+    public void setDiscountPercent(float discountPercent) {
         this.discountPercent = discountPercent;
-    }
-
-    public Integer getLength() {
-        return length;
-    }
-
-    public void setLength(Integer length) {
-        this.length = length;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public Integer getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Integer weight) {
-        this.weight = weight;
-    }
-
-    public String getMainImage() {
-        return mainImage;
-    }
-
-    public void setMainImage(String mainImage) {
-        this.mainImage = mainImage;
     }
 
     public Category getCategory() {
@@ -188,19 +128,27 @@ public class Product {
         this.images = images;
     }
 
-    public Integer getReviewCount() {
+    public List<Description> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<Description> details) {
+        this.details = details;
+    }
+
+    public int getReviewCount() {
         return reviewCount;
     }
 
-    public void setReviewCount(Integer reviewCount) {
+    public void setReviewCount(int reviewCount) {
         this.reviewCount = reviewCount;
     }
 
-    public Integer getAverageRating() {
+    public int getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(Integer averageRating) {
+    public void setAverageRating(int averageRating) {
         this.averageRating = averageRating;
     }
 
@@ -212,19 +160,11 @@ public class Product {
         this.mainImagePath = mainImagePath;
     }
 
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public Integer getDiscountPrice() {
+    public float getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(Integer discountPrice) {
+    public void setDiscountPrice(float discountPrice) {
         this.discountPrice = discountPrice;
     }
 }

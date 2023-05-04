@@ -108,7 +108,9 @@ public class StoreFragment extends Fragment {
                 if (response.isSuccessful()){
                     mListProducts = response.body();
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
-                    productAdapter = new ProductAdapter(mListProducts,rcvProduct.getContext());
+                    productAdapter = new ProductAdapter();
+                    productAdapter.setmListProducts(mListProducts);
+                    productAdapter.setContext(getContext());
                     rcvProduct.setLayoutManager(gridLayoutManager);
                     rcvProduct.setAdapter(productAdapter);
                 }
