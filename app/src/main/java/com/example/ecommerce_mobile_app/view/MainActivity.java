@@ -6,11 +6,16 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.os.StrictMode;
 
+import com.bumptech.glide.Glide;
 import com.example.ecommerce_mobile_app.R;
+import com.example.ecommerce_mobile_app.api.CONSTANT;
 import com.example.ecommerce_mobile_app.databinding.ActivityMainBinding;
+import com.example.ecommerce_mobile_app.model.Customer;
+import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.example.ecommerce_mobile_app.view.fragment.CartFragment;
 import com.example.ecommerce_mobile_app.view.fragment.HomeFragment;
 import com.example.ecommerce_mobile_app.view.fragment.StoreFragment;
+import com.google.gson.Gson;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +28,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
+
+        String json = new PrefManager(getApplicationContext()).getCustomer();
+        if (!json.isEmpty()){
+            Customer customer = new Gson().fromJson(json,Customer.class);
+            activityMainBinding.tvNameUser.setText(customer.getLastName());
+            Glide.with(getApplicationContext()).load(CONSTANT.BASE_URL.substring(0,CONSTANT.BASE_URL.length()-1) + customer.getPhotoImagePath());
+        }
 
         chipNavigationBar = activityMainBinding.NavigationBar;
         chipNavigationBar.setItemSelected(R.id.home, true);

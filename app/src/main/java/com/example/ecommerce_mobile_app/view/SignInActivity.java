@@ -4,16 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.ecommerce_mobile_app.AsyncTask.SignInAsyncTask;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivitySignInBinding;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
-import com.example.ecommerce_mobile_app.model.SignInResponse;
+import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.util.PrefManager;
+import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +22,7 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity {
     private ActivitySignInBinding activitySignInBinding;
     private String username, password;
+    private PrefManager prefManager = new PrefManager(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,15 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void doSignIn(){
-        RetrofitClient.getInstance().signIn(new SignInRequest("lehoanganhvn@gmail.com","anh2020")).enqueue(new Callback<SignInResponse>() {
+        RetrofitClient.getInstance().signIn(new SignInRequest(username,password)).enqueue(new Callback<BaseResponse>() {
             @Override
-            public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
+            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
                 if (response.isSuccessful()){
                     if (response.body().getData()!= null){
                         Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+                        Gson gson = new Gson();
+                        String customer = gson.toJson(response.body().getData());
+                        prefManager.saveLoginUser(customer);
                         startActivity(intent);
                         finish();
                     }
@@ -65,7 +69,7 @@ public class SignInActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<SignInResponse> call, Throwable t) {
+            public void onFailure(Call<BaseResponse> call, Throwable t) {
 
             }
         });
