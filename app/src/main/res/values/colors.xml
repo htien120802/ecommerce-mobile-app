@@ -12,4 +12,6 @@
     <color name="rate">#FFAB07</color>
     <color name="signupin">#1E1E1E</color>
     <color name="facebook">#3B5998</color>
+    <color name="toastRed">#ff5f65</color>
+    <color name="toastGreen">#6fc57e</color>
 </resources>

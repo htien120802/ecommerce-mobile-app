@@ -73,6 +73,66 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/LayoutImageProfileDetail">
 
+            <Button
+                android:id="@+id/btnSaveProfileDetail"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:background="@drawable/custom_btn_primary"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutPhoneNumber" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutEmail">
+
+                <TextView
+                    android:id="@+id/tvPhoneNumberProfileDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_extralight"
+                    android:text="Phone Number"
+                    android:textColor="#acacac"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:fontFamily="@font/poppins_bold" />
+
+                <EditText
+                    android:id="@+id/etPhoneNumberProfileDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="140dp"
+                    android:background="@drawable/custom_input_profile_detail"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="Phone Number"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvPhoneNumberProfileDetail"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/LayoutFirstName"
                 android:layout_width="match_parent"
@@ -101,7 +161,7 @@
                     android:id="@+id/etFirstNameProfileDetail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginStart="110dp"
+                    android:layout_marginStart="140dp"
                     android:background="@drawable/custom_input_profile_detail"
                     android:ems="10"
                     android:fontFamily="@font/poppins_medium"
@@ -145,7 +205,7 @@
                     android:id="@+id/etLastNameProfileDetail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginStart="110dp"
+                    android:layout_marginStart="140dp"
                     android:background="@drawable/custom_input_profile_detail"
                     android:ems="10"
                     android:fontFamily="@font/poppins_medium"
@@ -190,7 +250,7 @@
                     android:id="@+id/etUserNameProfileDetail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginStart="110dp"
+                    android:layout_marginStart="140dp"
                     android:background="@drawable/custom_input_profile_detail"
                     android:ems="10"
                     android:fontFamily="@font/poppins_medium"
@@ -235,7 +295,7 @@
                     android:id="@+id/etEmailProfileDetail"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginStart="110dp"
+                    android:layout_marginStart="140dp"
                     android:background="@drawable/custom_input_profile_detail"
                     android:ems="10"
                     android:fontFamily="@font/poppins_medium"
@@ -251,19 +311,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/btnSaveProfileDetail"
-                android:layout_width="85dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="25dp"
-                android:background="@drawable/custom_btn_primary"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Save"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LayoutEmail" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

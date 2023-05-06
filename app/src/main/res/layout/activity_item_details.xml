@@ -28,6 +28,12 @@
                     android:id="@+id/viewPagerItemDetails"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:layout_marginBottom="25dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -57,7 +63,7 @@
                     android:id="@+id/circle_indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
