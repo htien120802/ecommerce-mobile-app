@@ -37,7 +37,6 @@
                 android:id="@+id/imgAvatar"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/avatarhome1"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

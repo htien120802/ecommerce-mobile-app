@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.api.CONSTANT;
 import com.example.ecommerce_mobile_app.model.Image;
+import com.example.ecommerce_mobile_app.view.MainActivity;
 
 import java.util.List;
 
@@ -32,8 +33,7 @@ public class ImageAdapter extends PagerAdapter {
         Image image = imagesList.get(position);
         if(image != null)
         {
-            String imagePath = image.getImagePath().replace("http://localhost:8081/", CONSTANT.BASE_URL);
-            Glide.with(mContext).load(imagePath).into(imgItem);
+            MainActivity.setImage(imgItem,image.getImagePath());
         }
 
         container.addView(view);

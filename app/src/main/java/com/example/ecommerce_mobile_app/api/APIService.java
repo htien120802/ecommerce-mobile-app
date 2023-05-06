@@ -1,6 +1,8 @@
 package com.example.ecommerce_mobile_app.api;
 
+import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Category;
+import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
@@ -31,8 +33,11 @@ public interface APIService {
     Call<Product> getProductById(@Path("id") int id);
 
     @POST("api/auth/signin")
-    Call<BaseResponse> signIn(@Body SignInRequest signInRequest);
+    Call<BaseResponse<Customer>> signIn(@Body SignInRequest signInRequest);
 
     @POST("api/auth/signup")
-    Call<BaseResponse> signUp(@Body SignUpRequest signUpRequest);
+    Call<BaseResponse<Customer>> signUp(@Body SignUpRequest signUpRequest);
+
+    @GET("api/cart/{customerId}")
+    Call<BaseResponse<List<CartItem>>> getCart(@Path("customerId") int customerId);
 }

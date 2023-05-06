@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivitySignUpBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
 
 import retrofit2.Call;
@@ -59,9 +60,9 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
     public void doSignUp(){
-        RetrofitClient.getInstance().signUp(signUpRequest).enqueue(new Callback<BaseResponse>() {
+        RetrofitClient.getInstance().signUp(signUpRequest).enqueue(new Callback<BaseResponse<Customer>>() {
             @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+            public void onResponse(Call<BaseResponse<Customer>> call, Response<BaseResponse<Customer>> response) {
                 if (response.isSuccessful()){
                     if (response.body().getData() != null){
                         Toast.makeText(getApplicationContext(),response.body().getResponse_description(),Toast.LENGTH_SHORT).show();
@@ -76,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<Customer>> call, Throwable t) {
 
             }
         });

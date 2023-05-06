@@ -2,10 +2,18 @@ package com.example.ecommerce_mobile_app.model;
 
 import java.io.Serializable;
 
-public class BaseResponse implements Serializable {
+public class BaseResponse<T> implements Serializable {
     private String response_message;
     private String response_description;
-    private Customer data;
+    private T data;
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 
     public String getResponse_message() {
         return response_message;
@@ -23,11 +31,5 @@ public class BaseResponse implements Serializable {
         this.response_description = response_description;
     }
 
-    public Customer getData() {
-        return data;
-    }
 
-    public void setData(Customer data) {
-        this.data = data;
-    }
 }

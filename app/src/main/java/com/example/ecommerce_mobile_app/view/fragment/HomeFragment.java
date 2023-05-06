@@ -6,16 +6,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ecommerce_mobile_app.AsyncTask.SetHomeProductAsyncTask;
 import com.example.ecommerce_mobile_app.R;
-import com.example.ecommerce_mobile_app.adapter.ProductAdapter;
+import com.example.ecommerce_mobile_app.adapter.BoxProductAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentHomeBinding;
 import com.example.ecommerce_mobile_app.model.Product;
@@ -31,7 +29,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     FragmentHomeBinding fragmentHomeBinding;
     RecyclerView rcvNew, rcvPopular;
-    ProductAdapter adapterNew = new ProductAdapter(), adapterPopular = new ProductAdapter();
+    BoxProductAdapter adapterNew = new BoxProductAdapter(), adapterPopular = new BoxProductAdapter();
     List<Product> mListProducts;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

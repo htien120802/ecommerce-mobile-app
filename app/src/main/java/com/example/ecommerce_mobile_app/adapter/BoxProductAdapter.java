@@ -3,22 +3,15 @@ package com.example.ecommerce_mobile_app.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.ecommerce_mobile_app.R;
-import com.example.ecommerce_mobile_app.api.CONSTANT;
 import com.example.ecommerce_mobile_app.databinding.ListItemBinding;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.view.ProductDetailActivity;
@@ -27,7 +20,7 @@ import com.example.ecommerce_mobile_app.view.ProductDetailActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
+public class BoxProductAdapter extends RecyclerView.Adapter<BoxProductAdapter.ProductViewHolder>{
     private List<Product> mListProducts;
     private List<Product> mOldListProducts;
 

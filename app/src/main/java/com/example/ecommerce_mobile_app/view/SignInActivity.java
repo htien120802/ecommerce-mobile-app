@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivitySignInBinding;
+import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.util.PrefManager;
@@ -50,14 +51,13 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void doSignIn(){
-        RetrofitClient.getInstance().signIn(new SignInRequest(username,password)).enqueue(new Callback<BaseResponse>() {
+        RetrofitClient.getInstance().signIn(new SignInRequest("tina.jamerson.2021@gmail.com","tina2020")).enqueue(new Callback<BaseResponse<Customer>>() {
             @Override
-            public void onResponse(Call<BaseResponse> call, Response<BaseResponse> response) {
+            public void onResponse(Call<BaseResponse<Customer>> call, Response<BaseResponse<Customer>> response) {
                 if (response.isSuccessful()){
                     if (response.body().getData()!= null){
                         Intent intent = new Intent(SignInActivity.this,MainActivity.class);
-                        Gson gson = new Gson();
-                        String customer = gson.toJson(response.body().getData());
+                        Customer customer = response.body().getData();
                         prefManager.saveLoginUser(customer);
                         startActivity(intent);
                         finish();
@@ -69,7 +69,7 @@ public class SignInActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse> call, Throwable t) {
+            public void onFailure(Call<BaseResponse<Customer>> call, Throwable t) {
 
             }
         });

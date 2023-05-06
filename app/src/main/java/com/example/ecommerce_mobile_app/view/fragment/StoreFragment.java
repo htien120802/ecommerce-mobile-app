@@ -1,6 +1,5 @@
 package com.example.ecommerce_mobile_app.view.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.databinding.BindingAdapter;
@@ -11,18 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.CategoryAdapter;
-import com.example.ecommerce_mobile_app.adapter.ProductAdapter;
-import com.example.ecommerce_mobile_app.api.APIService;
+import com.example.ecommerce_mobile_app.adapter.BoxProductAdapter;
 import com.example.ecommerce_mobile_app.api.CONSTANT;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentStoreBinding;
@@ -30,7 +26,6 @@ import com.example.ecommerce_mobile_app.model.Category;
 import com.example.ecommerce_mobile_app.model.Product;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,7 +38,7 @@ public class StoreFragment extends Fragment {
     private List<Category> mListCategories;
     private List<Product> mListProducts;
     private CategoryAdapter categoryAdapter;
-    private ProductAdapter productAdapter;
+    private BoxProductAdapter boxProductAdapter;
     private RecyclerView rcvCategory, rcvProduct;
     private String keySearch = "";
     private String categoryFilter = "All";
@@ -65,7 +60,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 keySearch = charSequence.toString();
-                productAdapter.doFilter(categoryFilter,keySearch);
+                boxProductAdapter.doFilter(categoryFilter,keySearch);
             }
 
             @Override
@@ -89,7 +84,7 @@ public class StoreFragment extends Fragment {
                         @Override
                         public void onItemClickListener(Category category) {
                             categoryFilter = category.getName();
-                            productAdapter.doFilter(categoryFilter,keySearch);
+                            boxProductAdapter.doFilter(categoryFilter,keySearch);
                         }
                     });
                     rcvCategory.setAdapter(categoryAdapter);
@@ -108,11 +103,11 @@ public class StoreFragment extends Fragment {
                 if (response.isSuccessful()){
                     mListProducts = response.body();
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
-                    productAdapter = new ProductAdapter();
-                    productAdapter.setmListProducts(mListProducts);
-                    productAdapter.setContext(getContext());
+                    boxProductAdapter = new BoxProductAdapter();
+                    boxProductAdapter.setmListProducts(mListProducts);
+                    boxProductAdapter.setContext(getContext());
                     rcvProduct.setLayoutManager(gridLayoutManager);
-                    rcvProduct.setAdapter(productAdapter);
+                    rcvProduct.setAdapter(boxProductAdapter);
                 }
 
             }
@@ -125,9 +120,5 @@ public class StoreFragment extends Fragment {
 
 
     }
-    @BindingAdapter("setImage")
-    public static void setImage(ImageView shapeableImageView, String imagePath){
-        imagePath = imagePath.replace("http://localhost:8081/", CONSTANT.BASE_URL);
-        Glide.with(shapeableImageView.getContext()).load(imagePath).into(shapeableImageView);
-    }
+
 }
