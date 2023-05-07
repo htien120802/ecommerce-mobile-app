@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="@{String.valueOf(cartItem.subtotal) + @string/currency}"
+                setTotalPrice="@{cartItem.subtotal}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/shapeableImageView"

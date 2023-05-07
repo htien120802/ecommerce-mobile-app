@@ -18,14 +18,13 @@ public class PrefManager {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         String customerJson = gson.toJson(customer);
         editor.putString("LogedCustomer",customerJson);
-        editor.commit();
+        editor.apply();
     }
 
     public Customer getCustomer() {
         SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
         String customerJson = sharedPreferences.getString("LogedCustomer", "");
-        Customer customer = new Gson().fromJson(customerJson,Customer.class);
-        return customer;
+        return gson.fromJson(customerJson,Customer.class);
     }
 
     public boolean isUserLogedOut() {

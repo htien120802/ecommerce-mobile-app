@@ -17,10 +17,20 @@ import java.util.List;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
     private List<CartItem> mListCartItems;
-    private ObservableField<String> total;
+    private IClickOnCartItem iClickOnCartItem;
+    public interface IClickOnCartItem {
+        public void clickMinus(CartItem cartItem);
+        public void clickPlus(CartItem cartItem);
+        public void clickDelete(List<CartItem> mListCartItems, CartItem cartItem);
+        public void clickProduct(CartItem cartItem);
+    }
+
+    public CartItemAdapter(IClickOnCartItem iClickOnCartItem) {
+        this.iClickOnCartItem = iClickOnCartItem;
+    }
+
     public void setmListCartItems(List<CartItem> mListCartItems){
         this.mListCartItems = mListCartItems;
-        calTotal();
         notifyDataSetChanged();
     }
     @NonNull
@@ -34,18 +44,54 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
         CartItem cartItem = mListCartItems.get(position);
         holder.listItemCartBinding.setCartItem(cartItem);
+        holder.listItemCartBinding.btnMinusQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickOnCartItem.clickMinus(cartItem);
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.listItemCartBinding.btnPlusQuantity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickOnCartItem.clickPlus(cartItem);
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.listItemCartBinding.btnDeleteItemCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickOnCartItem.clickDelete(mListCartItems,cartItem);
+                notifyDataSetChanged();
+            }
+        });
+
+        holder.listItemCartBinding.shapeableImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickOnCartItem.clickProduct(cartItem);
+            }
+        });
+        holder.listItemCartBinding.textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iClickOnCartItem.clickProduct(cartItem);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return mListCartItems != null ? mListCartItems.size() : 0;
     }
-    public void calTotal(){
+    public Float calTotal(){
         Float sumPrice = 0f;
         for (CartItem cartItem : mListCartItems){
             sumPrice = sumPrice + cartItem.getSubtotal();
         }
-        this.total.set(String.valueOf(sumPrice));
+        return sumPrice;
     }
     public class CartItemViewHolder extends RecyclerView.ViewHolder{
         ListItemCartBinding listItemCartBinding;

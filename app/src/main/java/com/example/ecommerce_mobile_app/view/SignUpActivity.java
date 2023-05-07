@@ -71,6 +71,7 @@ public class SignUpActivity extends AppCompatActivity {
                         finish();
                     }
                     else {
+
                         Toast.makeText(getApplicationContext(),response.body().getResponse_description(),Toast.LENGTH_SHORT).show();
                     }
                 }

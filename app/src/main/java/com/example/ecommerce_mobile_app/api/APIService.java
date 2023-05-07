@@ -40,4 +40,13 @@ public interface APIService {
 
     @GET("api/cart/{customerId}")
     Call<BaseResponse<List<CartItem>>> getCart(@Path("customerId") int customerId);
+
+    @POST("api/cart/{customerId}/update/{productId}/{quantity}")
+    Call<BaseResponse<List<CartItem>>> updateCartItem(@Path("customerId") int customerId, @Path("productId") int productId, @Path("quantity") int quantity);
+
+    @POST("api/cart/{customerId}/remove/{productId}")
+    Call<BaseResponse<List<CartItem>>> removeCartItem(@Path("customerId") int customerId, @Path("productId") int productId);
+
+    @POST("api/cart/{customerId}/add/{productId}/{quantity}")
+    Call<BaseResponse<List<CartItem>>> addCartItem(@Path("customerId") int customerId, @Path("productId") int productId, @Path("quantity") int quantity);
 }

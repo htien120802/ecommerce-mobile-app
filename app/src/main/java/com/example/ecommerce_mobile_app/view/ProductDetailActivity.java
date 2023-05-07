@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ecommerce_mobile_app.adapter.ImageAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityItemDetailsBinding;
+import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.util.PrefManager;
 
 
 import java.util.ArrayList;
@@ -24,14 +28,14 @@ import retrofit2.Response;
 
 public class ProductDetailActivity extends AppCompatActivity {
     ActivityItemDetailsBinding activityItemDetailsBinding;
-    private int id;
+    private int productId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityItemDetailsBinding = ActivityItemDetailsBinding.inflate(getLayoutInflater());
         Bundle bundle = getIntent().getExtras();
-        id = (int) bundle.getSerializable("product_id");
-        callAPI();
+        productId = (int) bundle.getSerializable("product_id");
+        getProduct(productId);
 
         activityItemDetailsBinding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +55,17 @@ public class ProductDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        activityItemDetailsBinding.btnAddtoCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCartItem(productId);
+            }
+        });
         setContentView(activityItemDetailsBinding.getRoot());
     }
-    public void callAPI(){
-        RetrofitClient.getInstance().getProductById(id).enqueue(new Callback<Product>() {
+    public void getProduct(int productId){
+        RetrofitClient.getInstance().getProductById(productId).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful()){
@@ -75,6 +86,26 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
+
+            }
+        });
+    }
+    public void addCartItem(int prodcutId){
+        RetrofitClient.getInstance().addCartItem(new PrefManager(this).getCustomer().getId(), prodcutId,1).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
+                String message;
+                if (response.isSuccessful()){
+                    message = response.body().getResponse_description();
+                }
+                else {
+                    message = "Add product to cart is unsuccescful!";
+                }
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<CartItem>>> call, Throwable t) {
 
             }
         });

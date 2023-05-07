@@ -58,7 +58,6 @@ public class BoxProductAdapter extends RecyclerView.Adapter<BoxProductAdapter.Pr
                 context.startActivity(intent);
             }
         });
-
     }
 
     @Override
