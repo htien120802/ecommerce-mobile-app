@@ -33,6 +33,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         this.mListCartItems = mListCartItems;
         notifyDataSetChanged();
     }
+    public List<CartItem> getmListCartItems(){
+        return this.mListCartItems;
+    }
     @NonNull
     @Override
     public CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

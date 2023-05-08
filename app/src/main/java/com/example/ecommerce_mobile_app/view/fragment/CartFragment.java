@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,8 @@ import com.example.ecommerce_mobile_app.databinding.FragmentCartBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.InfoCart;
+import com.example.ecommerce_mobile_app.util.CustomDialog;
+import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.example.ecommerce_mobile_app.view.MainActivity;
 import com.example.ecommerce_mobile_app.view.ProductDetailActivity;
@@ -44,44 +47,7 @@ public class CartFragment extends Fragment {
     
     List<CartItem> mListCartItems;
     RecyclerView recyclerView;
-    CartItemAdapter cartItemAdapter = new CartItemAdapter(new CartItemAdapter.IClickOnCartItem() {
-        @Override
-        public void clickMinus(CartItem cartItem) {
-            if (cartItem.getQuantity() == 1){
-
-            }else {
-                infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal()/cartItem.getQuantity());
-                cartItem.setSubtotal(cartItem.getSubtotal() - cartItem.getSubtotal()/cartItem.getQuantity());
-                cartItem.setQuantity(cartItem.getQuantity()-1);
-                updateCartItem(cartItem);
-            }
-        }
-
-        @Override
-        public void clickPlus(CartItem cartItem) {
-            infoCart.setTotalPrice(infoCart.getTotalPrice() + cartItem.getSubtotal()/cartItem.getQuantity());
-            cartItem.setSubtotal(cartItem.getSubtotal() + cartItem.getSubtotal()/cartItem.getQuantity());
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
-            updateCartItem(cartItem);
-        }
-
-        @Override
-        public void clickDelete(List<CartItem> mListCartItems, CartItem cartItem) {
-            infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal());
-            infoCart.setTotalItem(infoCart.getTotalItem() - 1);
-            mListCartItems.remove(cartItem);
-            deleteCartItem(cartItem);
-        }
-
-        @Override
-        public void clickProduct(CartItem cartItem) {
-            Intent intent = new Intent(getContext(), ProductDetailActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("product_id",cartItem.getProductId());
-            intent.putExtras(bundle);
-            startActivity(intent);
-        }
-    });
+    CartItemAdapter cartItemAdapter;
 
     private final InfoCart infoCart = new InfoCart();
 
@@ -103,8 +69,59 @@ public class CartFragment extends Fragment {
 
                     assert response.body() != null;
                     if (response.body().getResponse_message().equals("Success")){
-                        //Log.e("ERR",response.body().getData().get(1).getShortName());
                         mListCartItems = response.body().getData();
+                        cartItemAdapter = new CartItemAdapter(new CartItemAdapter.IClickOnCartItem() {
+                            @Override
+                            public void clickMinus(CartItem cartItem) {
+                                if (cartItem.getQuantity() == 1){
+                                    clickDelete(cartItemAdapter.getmListCartItems(),cartItem);
+                                }else {
+                                    infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal()/cartItem.getQuantity());
+                                    cartItem.setSubtotal(cartItem.getSubtotal() - cartItem.getSubtotal()/cartItem.getQuantity());
+                                    cartItem.setQuantity(cartItem.getQuantity()-1);
+                                    updateCartItem(cartItem);
+                                }
+                            }
+
+                            @Override
+                            public void clickPlus(CartItem cartItem) {
+                                infoCart.setTotalPrice(infoCart.getTotalPrice() + cartItem.getSubtotal()/cartItem.getQuantity());
+                                cartItem.setSubtotal(cartItem.getSubtotal() + cartItem.getSubtotal()/cartItem.getQuantity());
+                                cartItem.setQuantity(cartItem.getQuantity() + 1);
+                                updateCartItem(cartItem);
+                            }
+
+                            @Override
+                            public void clickDelete(List<CartItem> mListCartItems, CartItem cartItem) {
+                                CustomDialog customDialog = new CustomDialog();
+                                customDialog.setPositiveButton(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        customDialog.dismiss();
+                                        infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal());
+                                        infoCart.setTotalItem(infoCart.getTotalItem() - 1);
+                                        mListCartItems.remove(cartItem);
+                                        deleteCartItem(cartItem);
+                                    }
+                                });
+                                customDialog.setNegativeButton(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        customDialog.dismiss();
+                                    }
+                                });
+                                customDialog.show(getActivity().getSupportFragmentManager(), "Delete cart item");
+                            }
+
+                            @Override
+                            public void clickProduct(CartItem cartItem) {
+                                Intent intent = new Intent(getContext(), ProductDetailActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("product_id",cartItem.getProductId());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        });
                         cartItemAdapter.setmListCartItems(mListCartItems);
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                         recyclerView.setLayoutManager(linearLayoutManager);
@@ -127,7 +144,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
                 if (!response.isSuccessful()){
-                    Toast.makeText(getContext(),"Save cart is unsucessful",Toast.LENGTH_SHORT).show();
+                    CustomToast.showFailMessage(getContext(),"Save cart is unsucessful");
                 }
 
             }
@@ -142,14 +159,14 @@ public class CartFragment extends Fragment {
         RetrofitClient.getInstance().removeCartItem(new PrefManager(getContext()).getCustomer().getId(),cartItem.getProductId()).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
             @Override
             public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
-                String message;
+
                 if (response.isSuccessful()){
-                    message = response.body().toString();
+                    CustomToast.showSuccessMessage(getContext(),response.body().getResponse_description());
                 }
                 else {
-                    message = "Delete product is unsuccessful!";
+                    CustomToast.showFailMessage(getContext(),"Delete product is unsuccessful!");
                 }
-                Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
