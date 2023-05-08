@@ -2,9 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:layout_margin="25dp"
     android:background="@drawable/custom_layout_dialog_delete_item_cart"
     android:elevation="5dp">
 
@@ -59,13 +58,15 @@
             android:id="@+id/btnCancel"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_btn_dialog_delete_item_cart_cancel"
             android:fontFamily="@font/poppins_medium"
             android:text="No"
             android:textAllCaps="false"
             android:textColor="#4F4F4F"
             android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/btnYes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,7 +74,7 @@
             android:id="@+id/btnYes"
             android:layout_width="120dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/custom_btn_dialog_delete_item_cart_yes"
             android:fontFamily="@font/poppins_medium"
             android:text="Yes"
