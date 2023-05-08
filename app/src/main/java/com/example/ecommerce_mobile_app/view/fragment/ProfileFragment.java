@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.databinding.FragmentProfileBinding;
 import com.example.ecommerce_mobile_app.util.PrefManager;
+import com.example.ecommerce_mobile_app.view.CustomerDetailActivity;
 import com.example.ecommerce_mobile_app.view.SignInActivity;
 
 
@@ -22,6 +23,13 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         fragmentProfileBinding = FragmentProfileBinding.inflate(inflater,container,false);
+        fragmentProfileBinding.LayoutUserDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), CustomerDetailActivity.class);
+                startActivity(intent);
+            }
+        });
         fragmentProfileBinding.btnLogoutProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
