@@ -13,6 +13,7 @@ import com.example.ecommerce_mobile_app.databinding.ActivitySignUpBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
+import com.example.ecommerce_mobile_app.util.CustomToast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,14 +66,14 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse<Customer>> call, Response<BaseResponse<Customer>> response) {
                 if (response.isSuccessful()){
                     if (response.body().getData() != null){
-                        Toast.makeText(getApplicationContext(),response.body().getResponse_description(),Toast.LENGTH_SHORT).show();
+                        CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         Intent intent = new Intent(SignUpActivity.this,SignInActivity.class);
                         startActivity(intent);
                         finish();
                     }
                     else {
 
-                        Toast.makeText(getApplicationContext(),response.body().getResponse_description(),Toast.LENGTH_SHORT).show();
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
                     }
                 }
             }

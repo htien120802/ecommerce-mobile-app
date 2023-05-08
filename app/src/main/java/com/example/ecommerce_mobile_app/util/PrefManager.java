@@ -26,7 +26,12 @@ public class PrefManager {
         String customerJson = sharedPreferences.getString("LogedCustomer", "");
         return gson.fromJson(customerJson,Customer.class);
     }
-
+    public void removeCustomer(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("LogedCustomer");
+        editor.apply();
+    }
     public boolean isUserLogedOut() {
         SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
         return sharedPreferences.getString("LogedCustomer", "").isEmpty();

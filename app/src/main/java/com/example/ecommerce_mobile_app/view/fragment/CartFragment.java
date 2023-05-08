@@ -1,25 +1,20 @@
 package com.example.ecommerce_mobile_app.view.fragment;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
-import androidx.databinding.ObservableField;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.CartItemAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentCartBinding;
@@ -29,12 +24,9 @@ import com.example.ecommerce_mobile_app.model.InfoCart;
 import com.example.ecommerce_mobile_app.util.CustomDialog;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
-import com.example.ecommerce_mobile_app.view.MainActivity;
 import com.example.ecommerce_mobile_app.view.ProductDetailActivity;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,19 +68,13 @@ public class CartFragment extends Fragment {
                                 if (cartItem.getQuantity() == 1){
                                     clickDelete(cartItemAdapter.getmListCartItems(),cartItem);
                                 }else {
-                                    infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal()/cartItem.getQuantity());
-                                    cartItem.setSubtotal(cartItem.getSubtotal() - cartItem.getSubtotal()/cartItem.getQuantity());
-                                    cartItem.setQuantity(cartItem.getQuantity()-1);
-                                    updateCartItem(cartItem);
+                                    updateCartItem(cartItem,"minus");
                                 }
                             }
 
                             @Override
                             public void clickPlus(CartItem cartItem) {
-                                infoCart.setTotalPrice(infoCart.getTotalPrice() + cartItem.getSubtotal()/cartItem.getQuantity());
-                                cartItem.setSubtotal(cartItem.getSubtotal() + cartItem.getSubtotal()/cartItem.getQuantity());
-                                cartItem.setQuantity(cartItem.getQuantity() + 1);
-                                updateCartItem(cartItem);
+                                updateCartItem(cartItem,"plus");
                             }
 
                             @Override
@@ -98,10 +84,7 @@ public class CartFragment extends Fragment {
                                     @Override
                                     public void onClick(View view) {
                                         customDialog.dismiss();
-                                        infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal());
-                                        infoCart.setTotalItem(infoCart.getTotalItem() - 1);
-                                        mListCartItems.remove(cartItem);
-                                        deleteCartItem(cartItem);
+                                        deleteCartItem(mListCartItems,cartItem);
                                     }
                                 });
                                 customDialog.setNegativeButton(new View.OnClickListener() {
@@ -139,12 +122,31 @@ public class CartFragment extends Fragment {
             }
         });
     }
-    public void updateCartItem(CartItem cartItem){
-        RetrofitClient.getInstance().updateCartItem(new PrefManager(getContext()).getCustomer().getId(),cartItem.getProductId(),cartItem.getQuantity()).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
+    public void updateCartItem(CartItem cartItem, String action){
+        RetrofitClient.getInstance().updateCartItem(new PrefManager(getContext()).getCustomer().getId(),cartItem.getProductId(),action.equals("minus") ? cartItem.getQuantity() - 1 : cartItem.getQuantity() + 1).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
             @Override
             public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
-                if (!response.isSuccessful()){
-                    CustomToast.showFailMessage(getContext(),"Save cart is unsucessful");
+                if (response.isSuccessful()){
+                    if (response.body().getResponse_message().equals("Success")){
+                        if (action.equals("plus")){
+                            infoCart.setTotalPrice(infoCart.getTotalPrice() + cartItem.getSubtotal()/cartItem.getQuantity());
+                            cartItem.setSubtotal(cartItem.getSubtotal() + cartItem.getSubtotal()/cartItem.getQuantity());
+                            cartItem.setQuantity(cartItem.getQuantity() + 1);
+                        }
+                        if (action.equals("minus")){
+                            infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal()/cartItem.getQuantity());
+                            cartItem.setSubtotal(cartItem.getSubtotal() - cartItem.getSubtotal()/cartItem.getQuantity());
+                            cartItem.setQuantity(cartItem.getQuantity() - 1);
+                        }
+
+                    }
+                    else {
+                        CustomToast.showFailMessage(getContext(),response.body().getResponse_description());
+                    }
+
+                }
+                else {
+                    CustomToast.showFailMessage(getContext(),"Save cart is unsucessful!");
                 }
 
             }
@@ -155,18 +157,25 @@ public class CartFragment extends Fragment {
             }
         });
     }
-    public void deleteCartItem(CartItem cartItem){
+    public void deleteCartItem(List<CartItem> mListCartItems, CartItem cartItem){
         RetrofitClient.getInstance().removeCartItem(new PrefManager(getContext()).getCustomer().getId(),cartItem.getProductId()).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
             @Override
             public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
-
                 if (response.isSuccessful()){
-                    CustomToast.showSuccessMessage(getContext(),response.body().getResponse_description());
+                    if (response.body().getResponse_message().equals("Success")){
+                        infoCart.setTotalPrice(infoCart.getTotalPrice() - cartItem.getSubtotal());
+                        infoCart.setTotalItem(infoCart.getTotalItem() - 1);
+                        mListCartItems.remove(cartItem);
+                        cartItemAdapter.notifyDataSetChanged();
+                        CustomToast.showSuccessMessage(getContext(),response.body().getResponse_description());
+                    }
+                    else {
+                        CustomToast.showFailMessage(getContext(),response.body().getResponse_description());
+                    }
                 }
                 else {
                     CustomToast.showFailMessage(getContext(),"Delete product is unsuccessful!");
                 }
-
             }
 
             @Override

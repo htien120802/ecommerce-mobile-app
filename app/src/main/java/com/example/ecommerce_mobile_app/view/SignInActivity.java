@@ -13,6 +13,7 @@ import com.example.ecommerce_mobile_app.databinding.ActivitySignInBinding;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.google.gson.Gson;
 
@@ -30,6 +31,9 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activitySignInBinding = ActivitySignInBinding.inflate(LayoutInflater.from(getApplicationContext()));
         setContentView(activitySignInBinding.getRoot());
+        if (!prefManager.isUserLogedOut()){
+            startMainActivity();
+        }
 
         activitySignInBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,19 +55,18 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void doSignIn(){
-        RetrofitClient.getInstance().signIn(new SignInRequest("tina.jamerson.2021@gmail.com","tina2020")).enqueue(new Callback<BaseResponse<Customer>>() {
+        RetrofitClient.getInstance().signIn(new SignInRequest(username,password)).enqueue(new Callback<BaseResponse<Customer>>() {
             @Override
             public void onResponse(Call<BaseResponse<Customer>> call, Response<BaseResponse<Customer>> response) {
                 if (response.isSuccessful()){
                     if (response.body().getData()!= null){
-                        Intent intent = new Intent(SignInActivity.this,MainActivity.class);
                         Customer customer = response.body().getData();
                         prefManager.saveLoginUser(customer);
-                        startActivity(intent);
-                        finish();
+                        startMainActivity();
+
                     }
                     else {
-                        Toast.makeText(getApplicationContext(),response.body().getResponse_description(),Toast.LENGTH_SHORT).show();
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
                     }
                 }
             }
@@ -73,6 +76,11 @@ public class SignInActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void startMainActivity(){
+        Intent intent = new Intent(SignInActivity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

@@ -16,6 +16,7 @@ import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 
 
@@ -94,14 +95,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         RetrofitClient.getInstance().addCartItem(new PrefManager(this).getCustomer().getId(), prodcutId,1).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
             @Override
             public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
-                String message;
                 if (response.isSuccessful()){
-                    message = response.body().getResponse_description();
+                    if (response.body().getResponse_message().equals("Success"))
+                        CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
+                    else
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
                 }
                 else {
-                    message = "Add product to cart is unsuccescful!";
+                    CustomToast.showFailMessage(getApplicationContext(),"Add product to cart is unsuccessful!");
                 }
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

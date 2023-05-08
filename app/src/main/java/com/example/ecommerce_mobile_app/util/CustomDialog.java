@@ -31,52 +31,10 @@ public class CustomDialog extends DialogFragment {
     }
 
     public void setPositiveButton(View.OnClickListener onClickListener){
-//        dismiss();
         this.btnYesListener = onClickListener;
     }
     public void setNegativeButton(View.OnClickListener onClickListener){
-//        dismiss();
         this.btnCancelListener = onClickListener;
     }
-    //    public interface IClickCustomDialog{
-//        public void clickYes();
-//        public void clickNo();
-//    }
-//    private Dialog dialog;
-//    private IClickCustomDialog clickCustomDialog;
-//    public CustomDialog(Context context, IClickCustomDialog clickCustomDialog){
-//        this.clickCustomDialog = clickCustomDialog;
-//        dialog = new Dialog(context);
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        dialog.setContentView(R.layout.layout_dialog_delete_item_cart);
-//        dialog.setCancelable(true);
-//
-//        dialog.findViewById(R.id.btnYes).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                clickCustomDialog.clickYes();
-//            }
-//        });
-//
-//        dialog.findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                clickCustomDialog.clickNo();
-//                dialog.dismiss();
-//            }
-//        });
-//    }
-//    public void show(int gravity){
-//        Window window = dialog.getWindow();
-//        if (window == null)
-//            return;
-//        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-//        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        WindowManager.LayoutParams windowAttributes = window.getAttributes();
-//        windowAttributes.gravity = gravity;
-//        window.setAttributes(windowAttributes);
-//    }
-//    public void dismiss(){
-//        dialog.dismiss();
-//    }
+
 }

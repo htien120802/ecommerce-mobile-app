@@ -12,6 +12,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -44,7 +45,7 @@ public interface APIService {
     @POST("api/cart/{customerId}/update/{productId}/{quantity}")
     Call<BaseResponse<List<CartItem>>> updateCartItem(@Path("customerId") int customerId, @Path("productId") int productId, @Path("quantity") int quantity);
 
-    @POST("api/cart/{customerId}/remove/{productId}")
+    @DELETE("api/cart/{customerId}/remove/{productId}")
     Call<BaseResponse<List<CartItem>>> removeCartItem(@Path("customerId") int customerId, @Path("productId") int productId);
 
     @POST("api/cart/{customerId}/add/{productId}/{quantity}")
