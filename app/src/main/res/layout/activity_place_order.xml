@@ -2,11 +2,7 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="customer"
-            type="com.example.ecommerce_mobile_app.model.Customer" />
-    </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -92,7 +88,7 @@
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.5"
                             android:fontFamily="@font/poppins_extralight"
-                            android:text="@{customer.addressLine1}"
+                            android:text="abc"
                             android:textAlignment="viewStart"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
@@ -124,7 +120,7 @@
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.5"
                             android:fontFamily="@font/poppins_extralight"
-                            android:text="@{customer.country.name}"
+                            android:text="abc"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -155,7 +151,7 @@
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.5"
                             android:fontFamily="@font/poppins_extralight"
-                            android:text="@{customer.addressLine2}"
+                            android:text="abc"
                             android:textAlignment="viewStart"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
@@ -187,7 +183,7 @@
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.5"
                             android:fontFamily="@font/poppins_extralight"
-                            android:text="@{customer.city}"
+                            android:text="abc"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -218,7 +214,7 @@
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.5"
                             android:fontFamily="@font/poppins_extralight"
-                            android:text="@{customer.phoneNumber}"
+                            android:text="abc"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -284,7 +280,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@{infoCart.totalPrice}"
+                    android:text="abc"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
