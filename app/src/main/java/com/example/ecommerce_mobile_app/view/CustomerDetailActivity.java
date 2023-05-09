@@ -12,13 +12,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +53,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private Uri mUri;
     private ShapeableImageView avatar;
     public static final String TAG = CustomerDetailActivity.class.getName();
+
+    boolean isUpdated;
     private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -88,6 +87,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         setContentView(activityPersonalDetailsBinding.getRoot());
         customer = prefManager.getCustomer();
         activityPersonalDetailsBinding.setCustomer(customer);
+        isUpdated = false;
         viewBinding();
         edit_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,12 +158,17 @@ public class CustomerDetailActivity extends AppCompatActivity {
         activityPersonalDetailsBinding.ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CustomerDetailActivity.this,MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("change_to","profile");
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
+                if (isUpdated){
+                    Intent intent = new Intent(CustomerDetailActivity.this,MainActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("change_to","profile");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    CustomerDetailActivity.super.onBackPressed();
+                }
             }
         });
     }
@@ -195,6 +200,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse<Customer>> call, Response<BaseResponse<Customer>> response) {
                 if (response.isSuccessful()){
                     if (response.body().getResponse_message().equals("Update Success")){
+                        isUpdated = true;
                         CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         isEditting = false;
                         edit_save.setText("Edit");
@@ -257,16 +263,16 @@ public class CustomerDetailActivity extends AppCompatActivity {
     public void uploadImage(){
         mProgressDialog.show();
         String IMAGE_PATH = RealPathUtil.getRealPath(this,mUri);
-        Log.e("ERR",IMAGE_PATH);
-        File file = new File(IMAGE_PATH);
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part image = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
+        File f = new File(IMAGE_PATH);
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), f);
+        MultipartBody.Part file = MultipartBody.Part.createFormData("file", f.getName(), requestFile);
 
-        RetrofitClient.getInstance().updatePhoto(customer.getId(),image).enqueue(new Callback<BaseResponse<String>>() {
+        RetrofitClient.getInstance().updatePhoto(customer.getId(),file).enqueue(new Callback<BaseResponse<String>>() {
             @Override
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
                 if (response.isSuccessful()){
                     mProgressDialog.dismiss();
+                    isUpdated = true;
                     if (response.body().getResponse_message().equals("Update Success")){
                         CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         MainActivity.setImage(avatar,response.body().getData());
@@ -276,8 +282,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         prefManager.changeCustomer(customer);
                     }
                     else {
-                        Log.e("ERR",response.body().toString());
-                        mProgressDialog.dismiss();
                         CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
                     }
                 }

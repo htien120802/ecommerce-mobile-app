@@ -12,6 +12,7 @@ import com.example.ecommerce_mobile_app.model.SignUpRequest;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -59,5 +60,5 @@ public interface APIService {
     Call<BaseResponse<Customer>> updateInfo(@Path("id") int id, @Body Profile profile);
     @Multipart
     @POST("api/account/{id}/update_photo")
-    Call<BaseResponse<String>> updatePhoto(@Path("id") int id, @Part MultipartBody.Part image);
+    Call<BaseResponse<String>> updatePhoto(@Path("id") int id, @Part MultipartBody.Part file);
 }
