@@ -53,6 +53,8 @@ public class CustomerDetailActivity extends AppCompatActivity {
     private Uri mUri;
     private ShapeableImageView avatar;
     public static final String TAG = CustomerDetailActivity.class.getName();
+
+    boolean isUpdated;
     private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -85,6 +87,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
         setContentView(activityPersonalDetailsBinding.getRoot());
         customer = prefManager.getCustomer();
         activityPersonalDetailsBinding.setCustomer(customer);
+        isUpdated = false;
         viewBinding();
         edit_save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,12 +158,17 @@ public class CustomerDetailActivity extends AppCompatActivity {
         activityPersonalDetailsBinding.ibBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(CustomerDetailActivity.this,MainActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("change_to","profile");
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
+                if (isUpdated){
+                    Intent intent = new Intent(CustomerDetailActivity.this,MainActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("change_to","profile");
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    CustomerDetailActivity.super.onBackPressed();
+                }
             }
         });
     }
@@ -192,6 +200,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse<Customer>> call, Response<BaseResponse<Customer>> response) {
                 if (response.isSuccessful()){
                     if (response.body().getResponse_message().equals("Update Success")){
+                        isUpdated = true;
                         CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         isEditting = false;
                         edit_save.setText("Edit");
@@ -263,6 +272,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
                 if (response.isSuccessful()){
                     mProgressDialog.dismiss();
+                    isUpdated = true;
                     if (response.body().getResponse_message().equals("Update Success")){
                         CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         MainActivity.setImage(avatar,response.body().getData());
@@ -272,7 +282,6 @@ public class CustomerDetailActivity extends AppCompatActivity {
                         prefManager.changeCustomer(customer);
                     }
                     else {
-                        mProgressDialog.dismiss();
                         CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
                     }
                 }
