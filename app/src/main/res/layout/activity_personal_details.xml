@@ -28,6 +28,7 @@
                 android:background="@drawable/custom_btn_category_store_unclick"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Cancel"
+                android:visibility="gone"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -79,7 +80,8 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/custom_btn_primary"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Edit Image"
+                android:text="Save"
+                android:visibility="gone"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -344,6 +346,7 @@
 
             <Button
                 android:id="@+id/btnCancel"
+                android:visibility="gone"
                 android:layout_width="85dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"

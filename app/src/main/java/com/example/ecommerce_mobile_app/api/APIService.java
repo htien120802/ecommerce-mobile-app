@@ -11,11 +11,14 @@ import com.example.ecommerce_mobile_app.model.SignUpRequest;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface APIService {
@@ -54,4 +57,7 @@ public interface APIService {
 
     @POST("api/account/{id}/update_info")
     Call<BaseResponse<Customer>> updateInfo(@Path("id") int id, @Body Profile profile);
+    @Multipart
+    @POST("api/account/{id}/update_photo")
+    Call<BaseResponse<String>> updatePhoto(@Path("id") int id, @Part MultipartBody.Part image);
 }
