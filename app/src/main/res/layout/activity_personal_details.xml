@@ -16,9 +16,23 @@
             android:id="@+id/LayoutImageProfileDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/btnCancelImage"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/custom_btn_category_store_unclick"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnUploadImage"
+                app:layout_constraintTop_toBottomOf="@+id/shapeableImageView6" />
 
             <ImageButton
                 android:id="@+id/ibBack"
@@ -32,10 +46,10 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/shapeableImageView6"
+                setImage="@{customer.photoImagePath}"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="44dp"
-                setImage="@{customer.photoImagePath}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,28 +68,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/borderImageCart"
-                app:srcCompat="@drawable/icon_write" />
+                app:srcCompat="@drawable/icon_image_upload" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/custom_btn_primary"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Upload image"
-                android:textColor="@color/black"
+                android:text="Edit Image"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
                 android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shapeableImageView6" />
+                app:layout_constraintTop_toBottomOf="@+id/shapeableImageView6"
+                app:layout_constraintVertical_bias="1.0" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/LayoutEditProfileDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/LayoutImageProfileDetail">
 
@@ -85,11 +103,13 @@
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/custom_btn_primary"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Edit"
                 android:textAllCaps="false"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LayoutPhoneNumber" />
 
@@ -110,28 +130,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_extralight"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="Phone Number"
                     android:textColor="#acacac"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:fontFamily="@font/poppins_bold" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/etPhoneNumberProfileDetail"
-                    android:enabled="false"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="140dp"
+                    android:background="@android:color/transparent"
                     android:ems="10"
+                    android:enabled="false"
                     android:fontFamily="@font/poppins_medium"
                     android:hint="Phone Number"
-                    android:text="@{customer.phoneNumber}"
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
+                    android:text="@{customer.phoneNumber}"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="16sp"
@@ -157,28 +176,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_extralight"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="First Name"
                     android:textColor="#acacac"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:fontFamily="@font/poppins_bold" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/etFirstNameProfileDetail"
-                    android:enabled="false"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="140dp"
+                    android:background="@android:color/transparent"
                     android:ems="10"
+                    android:enabled="false"
                     android:fontFamily="@font/poppins_medium"
                     android:hint="First Name"
-                    android:text="@{customer.firstName}"
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
+                    android:text="@{customer.firstName}"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="16sp"
@@ -203,28 +221,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_extralight"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="Last Name"
                     android:textColor="#acacac"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:fontFamily="@font/poppins_bold" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/etLastNameProfileDetail"
-                    android:enabled="false"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="140dp"
+                    android:background="@android:color/transparent"
                     android:ems="10"
+                    android:enabled="false"
                     android:fontFamily="@font/poppins_medium"
                     android:hint="Last Name"
-                    android:text="@{customer.lastName}"
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
+                    android:text="@{customer.lastName}"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="16sp"
@@ -250,28 +267,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_extralight"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="User Name"
                     android:textColor="#acacac"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:fontFamily="@font/poppins_bold" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/etUserNameProfileDetail"
-                    android:enabled="false"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="140dp"
+                    android:background="@android:color/transparent"
                     android:ems="10"
+                    android:enabled="false"
                     android:fontFamily="@font/poppins_medium"
                     android:hint="User Name"
-                    android:text="@{customer.username}"
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
+                    android:text="@{customer.username}"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="16sp"
@@ -297,28 +313,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
-                    android:fontFamily="@font/poppins_extralight"
+                    android:fontFamily="@font/poppins_bold"
                     android:text="Email"
                     android:textColor="#acacac"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:fontFamily="@font/poppins_bold" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/etEmailProfileDetail"
-                    android:enabled="false"
-                    android:background="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginStart="140dp"
+                    android:background="@android:color/transparent"
                     android:ems="10"
+                    android:enabled="false"
                     android:fontFamily="@font/poppins_medium"
                     android:hint="Email"
-                    android:text="@{customer.email}"
                     android:inputType="textPersonName"
                     android:paddingLeft="20dp"
                     android:paddingTop="10dp"
+                    android:text="@{customer.email}"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:textSize="16sp"
@@ -329,17 +344,18 @@
 
             <Button
                 android:id="@+id/btnCancel"
-                android:visibility="gone"
                 android:layout_width="85dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="25dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/custom_btn_category_store_unclick"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Cancel"
-                android:textColor="@color/black"
                 android:textAllCaps="false"
+                android:textColor="@color/black"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/btnEditSaveProfileDetail"
                 app:layout_constraintTop_toBottomOf="@+id/LayoutPhoneNumber" />
 

@@ -18,7 +18,7 @@
     <style name="toastFail">
         <item name="stTextBold">true</item>
         <item name="stTextColor">@color/white</item>
-        <item name="stFont">@font/poppins_medium</item>
+        <item name="stFont">@font/poppins_bold</item>
         <item name="stTextSize">12sp</item>
         <item name="stColorBackground">@color/toastRed</item>
         <item name="stSolidBackground">true</item>
@@ -28,7 +28,7 @@
     <style name="toastSuccess">
         <item name="stTextBold">true</item>
         <item name="stTextColor">@color/white</item>
-        <item name="stFont">@font/poppins_medium</item>
+        <item name="stFont">@font/poppins_bold</item>
         <item name="stTextSize">12sp</item>
         <item name="stColorBackground">@color/toastGreen</item>
         <item name="stSolidBackground">true</item>
