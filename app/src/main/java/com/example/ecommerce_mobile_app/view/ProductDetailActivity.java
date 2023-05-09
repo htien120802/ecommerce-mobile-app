@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.ecommerce_mobile_app.adapter.DescriptionAdapter;
 import com.example.ecommerce_mobile_app.adapter.ImageAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityItemDetailsBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
+import com.example.ecommerce_mobile_app.model.Description;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.util.CustomToast;
@@ -82,6 +85,12 @@ public class ProductDetailActivity extends AppCompatActivity {
                     activityItemDetailsBinding.viewPagerItemDetails.setAdapter(imageAdapter);
                     activityItemDetailsBinding.circleIndicator.setViewPager(activityItemDetailsBinding.viewPagerItemDetails);
                     imageAdapter.registerDataSetObserver(activityItemDetailsBinding.circleIndicator.getDataSetObserver());
+
+                    DescriptionAdapter descriptionAdapter = new DescriptionAdapter();
+                    descriptionAdapter.setList(product.getDetails());
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+                    activityItemDetailsBinding.rvDes.setLayoutManager(linearLayoutManager);
+                    activityItemDetailsBinding.rvDes.setAdapter(descriptionAdapter);
                 }
             }
 
