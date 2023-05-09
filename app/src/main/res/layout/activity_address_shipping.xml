@@ -1,229 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <ImageButton
-        android:id="@+id/backChangePassword"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/icon_arrow"
-        tools:layout_editor_absoluteX="25dp"
-        tools:layout_editor_absoluteY="44dp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Address Shipping"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backChangePassword" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/LayoutEditProfileDetail"
+<layout>
+    <data>
+        <variable
+            name="customer"
+            type="com.example.ecommerce_mobile_app.model.Customer" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LayoutAddress3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LayoutCity">
-
-            <TextView
-                android:id="@+id/tvCountry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/poppins_extralight"
-                android:text="Country"
-                android:textColor="#acacac"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:fontFamily="@font/poppins_bold" />
-
-            <EditText
-                android:id="@+id/etCountry"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="140dp"
-                android:background="@drawable/custom_input_profile_detail"
-                android:ems="10"
-                android:fontFamily="@font/poppins_medium"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvAddress2"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LayoutAddress1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tvAddress1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/poppins_extralight"
-                android:text="Address Line 1"
-                android:textColor="#acacac"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:fontFamily="@font/poppins_bold" />
-
-            <EditText
-                android:id="@+id/etAddress1"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="140dp"
-                android:background="@drawable/custom_input_profile_detail"
-                android:ems="10"
-                android:fontFamily="@font/poppins_medium"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvAddress1"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LayoutAddress2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LayoutAddress1">
-
-            <TextView
-                android:id="@+id/tvAddress2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/poppins_extralight"
-                android:text="Address Line 2"
-                android:textColor="#acacac"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:fontFamily="@font/poppins_bold" />
-
-            <EditText
-                android:id="@+id/etAddress2"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="140dp"
-                android:background="@drawable/custom_input_profile_detail"
-                android:ems="10"
-                android:fontFamily="@font/poppins_medium"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvAddress2"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/LayoutCity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginEnd="25dp"
-            android:paddingBottom="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LayoutAddress2">
-
-            <TextView
-                android:id="@+id/tvCityAddressShipping"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:fontFamily="@font/poppins_extralight"
-                android:text="City"
-                android:textColor="#acacac"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:fontFamily="@font/poppins_bold" />
-
-            <EditText
-                android:id="@+id/etCityAddressShipping"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="140dp"
-                android:background="@drawable/custom_input_profile_detail"
-                android:ems="10"
-                android:fontFamily="@font/poppins_medium"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvAddress2"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="85dp"
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/custom_btn_primary"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Save"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LayoutAddress3" />
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/icon_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Address Shipping"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/LayoutEditProfileDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutAddress3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutCity">
+
+                <TextView
+                    android:id="@+id/tvCountry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_extralight"
+                    android:text="Country"
+                    android:textColor="#acacac"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:fontFamily="@font/poppins_bold" />
+
+                <EditText
+                    android:id="@+id/etCountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="140dp"
+                    android:focusable="false"
+                    android:background="@null"
+                    android:text="@{customer.country.name}"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutAddress1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tvAddress1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_extralight"
+                    android:text="Address Line 1"
+                    android:textColor="#acacac"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:fontFamily="@font/poppins_bold" />
+
+                <EditText
+                    android:id="@+id/etAddress1"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="140dp"
+                    android:focusable="false"
+                    android:background="@null"
+                    android:ems="10"
+                    android:text="@{customer.addressLine1}"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvAddress1"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutAddress2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutAddress1">
+
+                <TextView
+                    android:id="@+id/tvAddress2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_extralight"
+                    android:text="Address Line 2"
+                    android:textColor="#acacac"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:fontFamily="@font/poppins_bold" />
+
+                <EditText
+                    android:id="@+id/etAddress2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="140dp"
+                    android:focusable="false"
+                    android:background="@null"
+                    android:text="@{customer.addressLine2}"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvAddress2"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/LayoutCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:paddingBottom="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutAddress2">
+
+                <TextView
+                    android:id="@+id/tvCityAddressShipping"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/poppins_extralight"
+                    android:text="City"
+                    android:textColor="#acacac"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:fontFamily="@font/poppins_bold" />
+
+                <EditText
+                    android:id="@+id/etCityAddressShipping"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="140dp"
+                    android:focusable="false"
+                    android:background="@null"
+                    android:text="@{customer.city}"
+                    android:ems="10"
+                    android:fontFamily="@font/poppins_medium"
+                    android:inputType="text"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/btnEditSave"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/custom_btn_primary"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Edit"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutAddress3" />
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="85dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="24dp"
+                android:textColor="@color/black"
+                android:background="@drawable/custom_btn_category_store_unclick"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Cancel"
+                android:visibility="gone"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnEditSave"
+                app:layout_constraintTop_toBottomOf="@+id/LayoutAddress3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

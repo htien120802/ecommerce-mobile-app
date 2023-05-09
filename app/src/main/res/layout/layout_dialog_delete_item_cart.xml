@@ -19,11 +19,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/tv_tittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Sure you want to delete?"
+            android:text="DELETE PRODUCT"
             android:textColor="#4F4F4F"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,16 +31,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/tv_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="Are you sure you want to delete this?"
+            android:text="Are you sure that you want to delete this product?"
             android:textColor="#4F4F4F"
+            android:textAlignment="center"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_tittle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,24 +1,31 @@
 package com.example.ecommerce_mobile_app.model;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
+import com.example.ecommerce_mobile_app.BR;
+
 import java.io.Serializable;
 
-public class Country implements Serializable {
+public class Country extends BaseObservable implements Serializable {
     String name;
     String code;
-
+    @Bindable
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
-
+    @Bindable
     public String getCode() {
         return code;
     }
 
     public void setCode(String code) {
         this.code = code;
+        notifyPropertyChanged(BR.code);
     }
 }

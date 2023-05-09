@@ -4,6 +4,7 @@ import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Category;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.model.Profile;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
@@ -50,4 +51,7 @@ public interface APIService {
 
     @POST("api/cart/{customerId}/add/{productId}/{quantity}")
     Call<BaseResponse<List<CartItem>>> addCartItem(@Path("customerId") int customerId, @Path("productId") int productId, @Path("quantity") int quantity);
+
+    @POST("api/account/{id}/update_info")
+    Call<BaseResponse<Customer>> updateInfo(@Path("id") int id, @Body Profile profile);
 }

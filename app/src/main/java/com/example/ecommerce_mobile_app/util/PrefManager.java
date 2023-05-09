@@ -36,5 +36,9 @@ public class PrefManager {
         SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
         return sharedPreferences.getString("LogedCustomer", "").isEmpty();
     }
+    public void changeCustomer(Customer customer){
+        removeCustomer();
+        saveLoginUser(customer);
+    }
 
 }
