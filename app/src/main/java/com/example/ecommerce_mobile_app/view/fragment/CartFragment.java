@@ -4,28 +4,37 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.CartItemAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentCartBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
+import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.InfoCart;
 import com.example.ecommerce_mobile_app.util.CustomDialog;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
+import com.example.ecommerce_mobile_app.view.AddressShippingActivity;
+import com.example.ecommerce_mobile_app.view.MainActivity;
+import com.example.ecommerce_mobile_app.view.PlaceOrderActivity;
 import com.example.ecommerce_mobile_app.view.ProductDetailActivity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,18 +52,70 @@ public class CartFragment extends Fragment {
 
     private final InfoCart infoCart = new InfoCart();
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         fragmentCartBinding = FragmentCartBinding.inflate(inflater,container,false);
         recyclerView = fragmentCartBinding.rvListCart;
         setCart();
+
+        fragmentCartBinding.btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Customer customer = new PrefManager(getContext()).getCustomer();
+                if (customer.getAddressLine1() == null || customer.getAddressLine2() == null || customer.getCity() == null || customer.getCountry() == null)
+                {
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.setTitle("ADDRESS SHIPPING");
+                    customDialog.setDes("Please fill full your address shipping");
+                    customDialog.setPositiveButton(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            customDialog.dismiss();
+                            Intent intent = new Intent(getContext(), AddressShippingActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    customDialog.setNegativeButton(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            customDialog.dismiss();
+                        }
+                    });
+                    customDialog.show(getActivity().getSupportFragmentManager(),"Fill address shipping");
+                } else if (cartItemAdapter.getmListCartItems().size() == 0){
+                    CustomDialog customDialog = new CustomDialog();
+                    customDialog.setTitle("EMPTY CART");
+                    customDialog.setDes("Your cart is empty. Please add something!");
+                    customDialog.setTextPositive("Go store");
+                    customDialog.setPositiveButton(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            customDialog.dismiss();
+                            ((MainActivity) getActivity()).changeFragment(R.id.store);
+                        }
+                    });
+                    customDialog.setNegativeButton(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            customDialog.dismiss();
+                        }
+                    });
+                    customDialog.show(getActivity().getSupportFragmentManager(),"Empty cart");
+                }
+                else {
+                    Intent intent = new Intent(getContext(), PlaceOrderActivity.class);
+                    intent.putExtra("listCartItems", (Serializable) cartItemAdapter.getmListCartItems());
+                    intent.putExtra("infoCart", (Serializable) infoCart);
+                    startActivity(intent);
+                }
+            }
+        });
         return fragmentCartBinding.getRoot();
     }
+
     public void setCart(){
-        int customerId = new PrefManager(getContext()).getCustomer().getId();
-        RetrofitClient.getInstance().getCart(customerId).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
+        RetrofitClient.getInstance().getCart(new PrefManager(getContext()).getCustomer().getId()).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
             @Override
             public void onResponse(@NonNull Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
                 if (response.isSuccessful()){

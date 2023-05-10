@@ -5,7 +5,9 @@ import androidx.databinding.Bindable;
 
 import com.example.ecommerce_mobile_app.BR;
 
-public class InfoCart extends BaseObservable {
+import java.io.Serializable;
+
+public class InfoCart extends BaseObservable implements Serializable {
     private int totalItem;
     private Float totalPrice;
     @Bindable
