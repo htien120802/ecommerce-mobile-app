@@ -8,6 +8,7 @@ import com.example.ecommerce_mobile_app.model.Profile;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
+import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
 
 import java.util.List;
 
@@ -61,4 +62,7 @@ public interface APIService {
     @Multipart
     @POST("api/account/{id}/update_photo")
     Call<BaseResponse<String>> updatePhoto(@Path("id") int id, @Part MultipartBody.Part file);
+
+    @POST("api/account/{id}/update_password")
+    Call<BaseResponse<String>> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest updatePasswordRequest);
 }

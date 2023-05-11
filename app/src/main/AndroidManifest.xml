@@ -35,6 +35,9 @@
             android:name=".view.MainActivity"
             android:exported="false" />
         <activity
+            android:name=".view.UpdatePasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.ProductDetailActivity"
             android:exported="false" />
         <activity
