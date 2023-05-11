@@ -69,7 +69,7 @@
                 android:layout_marginStart="28dp"
                 android:fontFamily="@font/poppins_bold"
                 android:maxLength="15"
-                android:text="@{String.valueOf(cartItem.subtotal) + @string/currency}"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@+id/shapeableImageView"
