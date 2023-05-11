@@ -2,6 +2,8 @@ package com.example.ecommerce_mobile_app.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.preference.Preference;
 import android.util.Log;
 import android.view.View;
@@ -23,8 +25,11 @@ import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +38,8 @@ import retrofit2.Response;
 public class ProductDetailActivity extends AppCompatActivity {
     ActivityItemDetailsBinding activityItemDetailsBinding;
     private int productId;
+    private Timer timer;
+    private int totalItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +74,33 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
         setContentView(activityItemDetailsBinding.getRoot());
+
+        autoSlideImages();
+    }
+
+    private void autoSlideImages(){
+        if(timer == null){
+            timer = new Timer();
+        }
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int currentItem = activityItemDetailsBinding.viewPagerItemDetails.getCurrentItem();
+                        int total = totalItem;
+                        if(currentItem < total){
+                            currentItem++;
+                            activityItemDetailsBinding.viewPagerItemDetails.setCurrentItem(currentItem);
+                        }else {
+                            activityItemDetailsBinding.viewPagerItemDetails.setCurrentItem(0);
+                        }
+                    }
+                });
+            }
+        },3000,3000);
     }
     public void getProduct(int productId){
         RetrofitClient.getInstance().getProductById(productId).enqueue(new Callback<Product>() {
@@ -81,6 +115,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     for (Image image : product.getImages()){
                         images.add(new Image(image.getImagePath()));
                     }
+                    totalItem = images.size() - 1; // lấy toltal để làm auto slide
                     ImageAdapter imageAdapter = new ImageAdapter(getApplicationContext(), images);
                     activityItemDetailsBinding.viewPagerItemDetails.setAdapter(imageAdapter);
                     activityItemDetailsBinding.circleIndicator.setViewPager(activityItemDetailsBinding.viewPagerItemDetails);
