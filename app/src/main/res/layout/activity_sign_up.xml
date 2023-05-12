@@ -337,7 +337,7 @@
                     android:paddingBottom="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/LayoutInfoAddress">
 
-                    <Button
+                    <android.widget.Button
                         android:id="@+id/btnSignUp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

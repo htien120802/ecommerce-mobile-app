@@ -106,12 +106,13 @@
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/tvSaleOff50" />
 
-                                <Button
+                                <android.widget.Button
                                     android:id="@+id/btnSaleOff50"
                                     android:layout_width="70dp"
                                     android:layout_height="25dp"
                                     android:layout_marginStart="12dp"
                                     android:layout_marginTop="12dp"
+                                    android:textColor="@color/white"
                                     android:background="@drawable/custom_btn_primary"
                                     android:text="Get Now"
                                     android:textSize="10sp"
@@ -163,7 +164,7 @@
                                     app:layout_constraintStart_toStartOf="@+id/imageBanner2"
                                     app:layout_constraintTop_toBottomOf="@+id/tvSaleOff70" />
 
-                                <Button
+                                <android.widget.Button
                                     android:id="@+id/btnSaleOff70"
                                     android:layout_width="70dp"
                                     android:layout_height="25dp"
@@ -171,6 +172,7 @@
                                     android:layout_marginTop="12dp"
                                     android:background="@drawable/custom_btn_primary"
                                     android:text="Get Now"
+                                    android:textColor="@color/white"
                                     android:textSize="10sp"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/tvSaleOff702" />

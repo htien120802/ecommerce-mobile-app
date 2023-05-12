@@ -220,7 +220,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnEditSave"
                 android:layout_width="85dp"
                 android:layout_height="35dp"
@@ -230,13 +230,14 @@
                 android:background="@drawable/custom_btn_primary"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Edit"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/LayoutAddress3" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnCancel"
                 android:layout_width="85dp"
                 android:layout_height="35dp"

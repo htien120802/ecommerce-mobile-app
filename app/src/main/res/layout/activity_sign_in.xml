@@ -26,7 +26,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/LayoutInfoAddress">
 
-                    <Button
+                    <android.widget.Button
                         android:id="@+id/btnLoginGoogle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/btnLoginFacebook" />
 
-                    <Button
+                    <android.widget.Button
                         android:id="@+id/btnLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
+                    <android.widget.Button
                         android:id="@+id/btnLoginFacebook"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

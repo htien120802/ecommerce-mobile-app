@@ -259,7 +259,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <Button
+                    <android.widget.Button
                         android:id="@+id/btnLogoutProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -269,6 +269,7 @@
                         android:background="@drawable/custom_btn_primary"
                         android:fontFamily="@font/poppins_bold"
                         android:text="Logout"
+                        android:textColor="@color/white"
                         android:textAllCaps="false"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"

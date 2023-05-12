@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:paddingRight="15dp">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/btnCategoryStore"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
