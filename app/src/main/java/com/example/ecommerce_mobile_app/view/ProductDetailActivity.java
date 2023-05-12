@@ -102,6 +102,16 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         },3000,3000);
     }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+    }
+
     public void getProduct(int productId){
         RetrofitClient.getInstance().getProductById(productId).enqueue(new Callback<Product>() {
             @Override
