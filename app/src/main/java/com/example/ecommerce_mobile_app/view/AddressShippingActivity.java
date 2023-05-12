@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.databinding.ActivityAddressShippingBinding;
@@ -18,6 +22,15 @@ public class AddressShippingActivity extends AppCompatActivity {
     ActivityAddressShippingBinding activityAddressShippingBinding;
     PrefManager prefManager = new PrefManager(this);
     Customer customer;
+    // đây nha coi khúc này làm tiếp nè
+    String[] listState =  {"1","2","3","4","5"};
+    AutoCompleteTextView autoCompleteTxtState;
+    ArrayAdapter<String> adapterState;
+    // khúc này coi country rồi set theo api nha
+    String[] listCountry =  {"Viet Nam","Thai Lan","Trung Quoc"};
+    AutoCompleteTextView autoCompleteTxtCountry;
+    ArrayAdapter<String> adapterCountry;
+
 
     EditText addLine1, addLine2, city, country;
     Button cancel, edit_save;
@@ -42,10 +55,10 @@ public class AddressShippingActivity extends AppCompatActivity {
                     isEditting = true;
                     edit_save.setText("Save");
                     cancel.setVisibility(View.VISIBLE);
+
                     enableEditting(addLine1);
                     enableEditting(addLine2);
                     enableEditting(city);
-                    enableEditting(country);
                 }
                 else {
                     isEditting = false;
@@ -58,7 +71,6 @@ public class AddressShippingActivity extends AppCompatActivity {
                     disableEditting(addLine1);
                     disableEditting(addLine2);
                     disableEditting(city);
-                    disableEditting(country);
                 }
             }
         });
@@ -76,7 +88,6 @@ public class AddressShippingActivity extends AppCompatActivity {
                 disableEditting(addLine1);
                 disableEditting(addLine2);
                 disableEditting(city);
-                disableEditting(country);
             }
         });
         activityAddressShippingBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +96,35 @@ public class AddressShippingActivity extends AppCompatActivity {
                 AddressShippingActivity.super.onBackPressed();
             }
         });
+
+        //khúc này là state mẫu nè nha
+        autoCompleteTxtState = findViewById(R.id.auto_complete_txtState);
+        adapterState = new ArrayAdapter<String>(this,R.layout.list_state,listState);
+        autoCompleteTxtState.setAdapter(adapterState);
+        autoCompleteTxtState.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getApplicationContext(),"Item: "+item,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //khúc này là country mẫu nè nha
+        autoCompleteTxtCountry = findViewById(R.id.auto_complete_txtCountry);
+        adapterCountry = new ArrayAdapter<String>(this,R.layout.list_country,listCountry);
+        autoCompleteTxtCountry.setAdapter(adapterCountry);
+        autoCompleteTxtCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getApplicationContext(),"Item: "+item,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     public void viewBinding(){
         addLine1 = activityAddressShippingBinding.etAddress1;
         addLine2 = activityAddressShippingBinding.etAddress2;
         city = activityAddressShippingBinding.etCityAddressShipping;
-        country = activityAddressShippingBinding.etCountry;
         cancel = activityAddressShippingBinding.btnCancel;
         edit_save = activityAddressShippingBinding.btnEditSave;
     }
