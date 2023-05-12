@@ -72,11 +72,25 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/tvShowState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:text="@{customer.state}"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvState" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:id="@+id/textinputLayoutState"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Select"
+                        android:hint="Sate"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/tvState"
                         tools:layout_editor_absoluteX="140dp">
 
@@ -114,11 +128,25 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:id="@+id/tvShowCountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:text="@{customer.country.name}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCountry" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:id="@+id/textinputLayoutCountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Select"
+                        android:hint="Country"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvCountry">
 
@@ -158,16 +186,18 @@
                         android:id="@+id/etAddress1"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:background="@null"
+                        android:background="@android:color/transparent"
                         android:ems="10"
+                        android:enabled="false"
                         android:fontFamily="@font/poppins_medium"
-                        android:inputType="text"
+                        android:inputType="textPersonName"
                         android:paddingTop="10dp"
                         android:text="@{customer.addressLine1}"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvAddress1" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -200,6 +230,7 @@
                         android:layout_height="40dp"
                         android:background="@null"
                         android:ems="10"
+                        android:enabled="false"
                         android:fontFamily="@font/poppins_medium"
                         android:inputType="text"
                         android:paddingTop="10dp"
@@ -240,6 +271,7 @@
                         android:layout_height="40dp"
                         android:background="@null"
                         android:ems="10"
+                        android:enabled="false"
                         android:fontFamily="@font/poppins_medium"
                         android:inputType="text"
                         android:paddingTop="10dp"

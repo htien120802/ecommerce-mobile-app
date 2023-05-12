@@ -9,12 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.databinding.ActivityAddressShippingBinding;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.util.PrefManager;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.prefs.PreferenceChangeEvent;
 
@@ -26,13 +28,15 @@ public class AddressShippingActivity extends AppCompatActivity {
     String[] listState =  {"1","2","3","4","5"};
     AutoCompleteTextView autoCompleteTxtState;
     ArrayAdapter<String> adapterState;
+    TextInputLayout textInputLayoutState, textInputLayoutCoutry;
     // khúc này coi country rồi set theo api nha
     String[] listCountry =  {"Viet Nam","Thai Lan","Trung Quoc"};
     AutoCompleteTextView autoCompleteTxtCountry;
     ArrayAdapter<String> adapterCountry;
 
 
-    EditText addLine1, addLine2, city, country;
+    TextView tvState, tvCountry;
+    EditText addLine1, addLine2, city;
     Button cancel, edit_save;
     boolean nullAddress;
     boolean isEditting = false;
@@ -56,6 +60,12 @@ public class AddressShippingActivity extends AppCompatActivity {
                     edit_save.setText("Save");
                     cancel.setVisibility(View.VISIBLE);
 
+                    textInputLayoutCoutry.setVisibility(View.VISIBLE);
+                    textInputLayoutState.setVisibility(View.VISIBLE);
+                    tvCountry.setVisibility(View.GONE);
+                    tvState.setVisibility(View.GONE);
+
+
                     enableEditting(addLine1);
                     enableEditting(addLine2);
                     enableEditting(city);
@@ -65,6 +75,11 @@ public class AddressShippingActivity extends AppCompatActivity {
                     nullAddress = false;
                     edit_save.setText("Edit");
                     cancel.setVisibility(View.GONE);
+
+                    textInputLayoutCoutry.setVisibility(View.GONE);
+                    textInputLayoutState.setVisibility(View.GONE);
+                    tvCountry.setVisibility(View.VISIBLE);
+                    tvState.setVisibility(View.VISIBLE);
 
                     updateAddress();
 
@@ -84,6 +99,10 @@ public class AddressShippingActivity extends AppCompatActivity {
                     edit_save.setText("Edit");
                 cancel.setVisibility(View.GONE);
 
+                textInputLayoutCoutry.setVisibility(View.GONE);
+                textInputLayoutState.setVisibility(View.GONE);
+                tvCountry.setVisibility(View.VISIBLE);
+                tvState.setVisibility(View.VISIBLE);
 
                 disableEditting(addLine1);
                 disableEditting(addLine2);
@@ -125,8 +144,13 @@ public class AddressShippingActivity extends AppCompatActivity {
         addLine1 = activityAddressShippingBinding.etAddress1;
         addLine2 = activityAddressShippingBinding.etAddress2;
         city = activityAddressShippingBinding.etCityAddressShipping;
+        tvState = activityAddressShippingBinding.tvShowState;
+        tvCountry = activityAddressShippingBinding.tvShowCountry;
         cancel = activityAddressShippingBinding.btnCancel;
         edit_save = activityAddressShippingBinding.btnEditSave;
+        //
+        textInputLayoutState = activityAddressShippingBinding.textinputLayoutState;
+        textInputLayoutCoutry = activityAddressShippingBinding.textinputLayoutCountry;
     }
     public void enableEditting(EditText editText){
         editText.setFocusable(true);
