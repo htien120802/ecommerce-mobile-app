@@ -12,6 +12,7 @@ import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
 import com.example.ecommerce_mobile_app.model.State;
 import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
+import com.example.ecommerce_mobile_app.model.WishlistItem;
 
 import java.util.List;
 
@@ -76,4 +77,16 @@ public interface APIService {
 
     @GET("api/account/{customerId}/orders")
     Call<BaseResponse<List<Order>>> getOrders(@Path("customerId") int customerId);
+
+    @GET("api/wishlist/{customerId}")
+    Call<BaseResponse<List<WishlistItem>>> getWishlist(@Path("customerId") int customerId);
+
+    @POST("api/wishlist/{customerId}/add/{productId}")
+    Call<BaseResponse<List<WishlistItem>>> addWishlistItem(@Path("customerId") int customerId, @Path("productId") int productId);
+
+    @DELETE("api/cart/{customerId}/remove/{productId}")
+    Call<BaseResponse<List<WishlistItem>>> removeWishlistItem(@Path("customerId") int customerId, @Path("productId") int productId);
+
+    @DELETE("api/cart/{customerId}/delete/{productId}")
+    Call<BaseResponse<List<WishlistItem>>> deleteWishlist(@Path("customerId") int customerId);
 }
