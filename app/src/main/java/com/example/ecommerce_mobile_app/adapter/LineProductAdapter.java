@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ecommerce_mobile_app.databinding.ListItemOrderBinding;
+import com.example.ecommerce_mobile_app.databinding.ListItemPlaceOrderBinding;
 import com.example.ecommerce_mobile_app.model.CartItem;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class LineProductAdapter extends RecyclerView.Adapter<LineProductAdapter.
     @NonNull
     @Override
     public LineProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ListItemOrderBinding listItemOrderBinding = ListItemOrderBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
-        return new LineProductViewHolder(listItemOrderBinding);
+        ListItemPlaceOrderBinding listItemPlaceOrderBinding = ListItemPlaceOrderBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new LineProductViewHolder(listItemPlaceOrderBinding);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class LineProductAdapter extends RecyclerView.Adapter<LineProductAdapter.
     }
 
     public class LineProductViewHolder extends RecyclerView.ViewHolder{
-        ListItemOrderBinding listItemOrderBinding;
-        public LineProductViewHolder(@NonNull ListItemOrderBinding listItemOrderBinding) {
+        ListItemPlaceOrderBinding listItemOrderBinding;
+        public LineProductViewHolder(@NonNull ListItemPlaceOrderBinding listItemOrderBinding) {
             super(listItemOrderBinding.getRoot());
             this.listItemOrderBinding = listItemOrderBinding;
         }

@@ -171,7 +171,7 @@
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -188,10 +188,8 @@
                         android:id="@+id/tvOdTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
-                        android:maxLength="19"
                         android:text="@{String.valueOf(order.orderTime)}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -201,7 +199,7 @@
                     android:id="@+id/linearLayout5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayoutTotal">
 
@@ -218,10 +216,8 @@
                         android:id="@+id/tvDeliverDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
-                        android:maxLength="19"
                         android:text="@{String.valueOf(order.deliverDate)}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
