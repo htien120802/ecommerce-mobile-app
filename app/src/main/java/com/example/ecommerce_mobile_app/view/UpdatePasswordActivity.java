@@ -2,6 +2,7 @@ package com.example.ecommerce_mobile_app.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,13 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             updatePasswordRequest.setNewPassword(newPassword);
             updatePasswordRequest.setConfirmPassword(confirmPassword);
             doChangePassword();
+        });
+
+        activityChangePasswordBinding.backChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdatePasswordActivity.super.onBackPressed();
+            }
         });
     }
 

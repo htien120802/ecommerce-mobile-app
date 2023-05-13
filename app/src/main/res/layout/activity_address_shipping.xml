@@ -50,6 +50,49 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/LayoutPostalCode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginEnd="25dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/LayoutCity">
+
+                    <TextView
+                        android:id="@+id/tv11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Postal Code"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/etPostalCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:ems="10"
+                        android:enabled="false"
+                        android:fontFamily="@font/poppins_medium"
+                        android:inputType="text"
+                        android:paddingTop="10dp"
+                        android:text="@{customer.postalCode}"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv11" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/LayoutAddress4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -59,7 +102,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LayoutCity">
+                    app:layout_constraintTop_toBottomOf="@+id/LayoutAddress3">
 
                     <TextView
                         android:id="@+id/tvState"
@@ -85,8 +128,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvState" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:id="@+id/textinputLayoutState"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Sate"
@@ -115,7 +158,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LayoutAddress4">
+                    app:layout_constraintTop_toBottomOf="@+id/LayoutPostalCode">
 
                     <TextView
                         android:id="@+id/tvCountry"
@@ -134,15 +177,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins_medium"
+                        android:text="@{customer.country.name}"
                         android:textColor="@color/black"
                         android:textSize="16sp"
-                        android:text="@{customer.country.name}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvCountry" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:id="@+id/textinputLayoutCountry"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Country"
@@ -300,7 +343,7 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/LayoutAddress3" />
+                    app:layout_constraintTop_toBottomOf="@+id/LayoutAddress4" />
 
                 <android.widget.Button
                     android:id="@+id/btnCancel"
@@ -318,7 +361,7 @@
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/btnEditSave"
-                    app:layout_constraintTop_toBottomOf="@+id/LayoutAddress3" />
+                    app:layout_constraintTop_toBottomOf="@+id/LayoutAddress4" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

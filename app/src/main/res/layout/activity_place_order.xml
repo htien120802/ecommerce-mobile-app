@@ -72,6 +72,68 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/linearLayoutPostalCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayoutState">
+
+                        <TextView
+                            android:id="@+id/tv1234"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="Postal Code:"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvPostalCodePlaceOrder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/poppins_extralight"
+                            android:text="@{customer.postalCode}"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                        <TextView
+                            android:id="@+id/tv123"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="State:"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/tvStatePlaceOrder"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.5"
+                            android:fontFamily="@font/poppins_extralight"
+                            android:text="@{customer.state}"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -88,7 +150,7 @@
                             android:fontFamily="@font/poppins_bold"
                             android:text="Address Line 1:"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tvAddressLine1"
@@ -98,9 +160,8 @@
                             android:layout_weight="0.5"
                             android:fontFamily="@font/poppins_extralight"
                             android:text="@{customer.addressLine1}"
-                            android:textAlignment="viewStart"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -110,7 +171,7 @@
                         android:orientation="horizontal"
                         android:weightSum="1"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPostalCode">
 
                         <TextView
                             android:id="@+id/tv5"
@@ -120,7 +181,7 @@
                             android:fontFamily="@font/poppins_bold"
                             android:text="Country:"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tvcountryPlaceOrder"
@@ -131,7 +192,7 @@
                             android:fontFamily="@font/poppins_extralight"
                             android:text="@{customer.country.name}"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -151,7 +212,7 @@
                             android:fontFamily="@font/poppins_bold"
                             android:text="Address Line 2:"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tvAddressLine2"
@@ -161,9 +222,8 @@
                             android:layout_weight="0.5"
                             android:fontFamily="@font/poppins_extralight"
                             android:text="@{customer.addressLine2}"
-                            android:textAlignment="viewStart"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -183,7 +243,7 @@
                             android:fontFamily="@font/poppins_bold"
                             android:text="City:"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tvCityOrder"
@@ -194,13 +254,14 @@
                             android:fontFamily="@font/poppins_extralight"
                             android:text="@{customer.city}"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/linearLayout4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
                         android:orientation="horizontal"
                         android:weightSum="1"
                         app:layout_constraintStart_toStartOf="parent"
@@ -214,7 +275,7 @@
                             android:fontFamily="@font/poppins_bold"
                             android:text="Phone number:"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tvPhoneOrder"
@@ -225,7 +286,7 @@
                             android:fontFamily="@font/poppins_extralight"
                             android:text="@{customer.phoneNumber}"
                             android:textColor="@color/black"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

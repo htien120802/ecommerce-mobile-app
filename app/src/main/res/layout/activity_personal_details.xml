@@ -28,10 +28,10 @@
                 android:background="@drawable/custom_btn_category_store_unclick"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Cancel"
-                android:visibility="gone"
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toStartOf="@+id/btnUploadImage"
                 app:layout_constraintTop_toBottomOf="@+id/shapeableImageView6" />
 
@@ -72,7 +72,7 @@
                 app:shapeAppearanceOverlay="@style/borderImageCart"
                 app:srcCompat="@drawable/icon_image_upload" />
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btnUploadImage"
                 android:layout_width="85dp"
                 android:layout_height="35dp"
