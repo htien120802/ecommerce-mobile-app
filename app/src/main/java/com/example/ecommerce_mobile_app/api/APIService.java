@@ -75,7 +75,7 @@ public interface APIService {
     @GET("api/list_states_by_country/{id}")
     Call<BaseResponse<List<State>>> getStateByCountry(@Path("id") int id);
 
-    @GET("api/account/{customerId}/orders")
+    @GET("api/account/{customerId}/order")
     Call<BaseResponse<List<Order>>> getOrders(@Path("customerId") int customerId);
 
     @GET("api/wishlist/{customerId}")
