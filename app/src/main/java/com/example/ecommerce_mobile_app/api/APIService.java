@@ -2,12 +2,15 @@ package com.example.ecommerce_mobile_app.api;
 
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Category;
+import com.example.ecommerce_mobile_app.model.Country;
 import com.example.ecommerce_mobile_app.model.Customer;
+import com.example.ecommerce_mobile_app.model.Order;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.Profile;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
+import com.example.ecommerce_mobile_app.model.State;
 import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
 
 import java.util.List;
@@ -65,4 +68,13 @@ public interface APIService {
 
     @POST("api/account/{id}/update_password")
     Call<BaseResponse<String>> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest updatePasswordRequest);
+
+    @GET("api/country")
+    Call<BaseResponse<List<Country>>> getCountry();
+
+    @GET("api/list_states_by_country/{id}")
+    Call<BaseResponse<List<State>>> getStateByCountry(@Path("id") int id);
+
+    @GET("api/account/{customerId}/orders")
+    Call<BaseResponse<List<Order>>> getOrders(@Path("customerId") int customerId);
 }

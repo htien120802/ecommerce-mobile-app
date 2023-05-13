@@ -14,6 +14,7 @@ import com.example.ecommerce_mobile_app.databinding.FragmentProfileBinding;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.example.ecommerce_mobile_app.view.AddressShippingActivity;
 import com.example.ecommerce_mobile_app.view.CustomerDetailActivity;
+import com.example.ecommerce_mobile_app.view.OrderActivity;
 import com.example.ecommerce_mobile_app.view.SignInActivity;
 import com.example.ecommerce_mobile_app.view.UpdatePasswordActivity;
 
@@ -48,6 +49,14 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent(getContext(), SignInActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+
+        fragmentProfileBinding.LayoutMyOrderProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), OrderActivity.class);
+                startActivity(intent);
             }
         });
 

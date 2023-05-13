@@ -83,4 +83,5 @@ public class MainActivity extends AppCompatActivity {
         imagePath = CONSTANT.BASE_URL + imagePath.substring(1,imagePath.length());
         Glide.with(shapeableImageView.getContext()).load(imagePath).error(shapeableImageView.getContext().getDrawable(R.drawable.avatarhome1)).into(shapeableImageView);
     }
+
 }

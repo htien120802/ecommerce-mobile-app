@@ -8,8 +8,18 @@ import com.example.ecommerce_mobile_app.BR;
 import java.io.Serializable;
 
 public class Country extends BaseObservable implements Serializable {
-    String name;
-    String code;
+    private int id;
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private String code;
     @Bindable
     public String getName() {
         return name;
