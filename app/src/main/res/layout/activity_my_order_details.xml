@@ -56,7 +56,7 @@
                     android:id="@+id/linearLayoutshippingAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayoutRecipientName">
 
@@ -101,6 +101,7 @@
                         android:id="@+id/tvRecipientName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
                         android:text="@{order.recipientName}"
@@ -129,9 +130,10 @@
                         android:id="@+id/tvTotalOrder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
-                        android:text="@{String.valueOf(order.total)}"
+                        android:text="@{String.valueOf(order.total) + @string/currency}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -157,9 +159,10 @@
                         android:id="@+id/tvTax"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
-                        android:text="@{String.valueOf(order.tax)}"
+                        android:text="@{String.valueOf(order.tax) + @string/currency}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -185,6 +188,7 @@
                         android:id="@+id/tvOdTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
                         android:maxLength="19"
@@ -214,9 +218,10 @@
                         android:id="@+id/tvDeliverDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
-                        android:maxLength="19"
                         android:fontFamily="@font/poppins_extralight"
+                        android:maxLength="19"
                         android:text="@{String.valueOf(order.deliverDate)}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
@@ -243,9 +248,10 @@
                         android:id="@+id/tvShippingCost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
-                        android:text="@{String.valueOf(order.shippingCost)}"
+                        android:text="@{String.valueOf(order.shippingCost) + @string/currency}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -271,9 +277,10 @@
                         android:id="@+id/tvSubtotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
-                        android:text="@{String.valueOf(order.subtotal)}"
+                        android:text="@{String.valueOf(order.subtotal) + @string/currency}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -300,6 +307,7 @@
                         android:id="@+id/tvStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
                         android:fontFamily="@font/poppins_extralight"
                         android:text="@{order.status}"

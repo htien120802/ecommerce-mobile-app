@@ -118,6 +118,7 @@ public class AddressShippingActivity extends AppCompatActivity {
                 textInputLayoutState.setVisibility(View.GONE);
                 tvCountry.setVisibility(View.VISIBLE);
                 tvState.setVisibility(View.VISIBLE);
+                activityAddressShippingBinding.LayoutAddress4.setVisibility(View.VISIBLE);
 
                 disableEditting(addLine1);
                 disableEditting(addLine2);
