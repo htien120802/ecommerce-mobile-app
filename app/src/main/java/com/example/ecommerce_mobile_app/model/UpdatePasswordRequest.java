@@ -2,6 +2,7 @@ package com.example.ecommerce_mobile_app.model;
 
 import java.io.Serializable;
 
+
 public class UpdatePasswordRequest implements Serializable {
 
     private String oldPassword;
