@@ -51,7 +51,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
                     assert response.body() != null;
                     if (response.body().getResponse_message().equals("Success")) {
                         CustomToast.showSuccessMessage(getApplicationContext(), response.body().getResponse_description());
-                        //UpdatePasswordActivity.super.onBackPressed();
+                        UpdatePasswordActivity.super.onBackPressed();
                     } else {
                         CustomToast.showFailMessage(getApplicationContext(), response.body().getResponse_description());
                     }

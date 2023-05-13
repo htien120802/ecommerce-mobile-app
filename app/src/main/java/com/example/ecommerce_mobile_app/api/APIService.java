@@ -1,5 +1,6 @@
 package com.example.ecommerce_mobile_app.api;
 
+import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Category;
 import com.example.ecommerce_mobile_app.model.Country;
@@ -8,7 +9,6 @@ import com.example.ecommerce_mobile_app.model.Order;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.Profile;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
 import com.example.ecommerce_mobile_app.model.State;
 import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
@@ -16,7 +16,6 @@ import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -33,13 +32,13 @@ public interface APIService {
 //            .addConverterFactory(GsonConverterFactory.create(gson))
 //            .build()
 //            .create(APIService.class);
-    @GET("api/categories")
+    @GET("api/category")
     Call<List<Category>> getCategories();
 
-    @GET("api/products")
+    @GET("api/product")
     Call<List<Product>> getProducts();
 
-    @GET("api/products/{id}")
+    @GET("api/product/{id}")
     Call<Product> getProductById(@Path("id") int id);
 
     @POST("api/auth/signin")
