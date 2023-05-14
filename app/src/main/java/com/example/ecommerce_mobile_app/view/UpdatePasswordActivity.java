@@ -21,6 +21,7 @@ import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
+import com.example.ecommerce_mobile_app.util.SendOTP;
 
 import java.util.Properties;
 import java.util.Random;
@@ -83,7 +84,9 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         activityChangePasswordBinding.btnSendOTP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMailOTP();
+                Random random = new Random();
+                codeOTP = random.nextInt(8999) + 1000;
+                SendOTP.sendMailOtp(codeOTP, customer.getEmail());
                 seconds = 30;
                 activityChangePasswordBinding.btnSendOTP.setEnabled(false);
                 activityChangePasswordBinding.btnSendOTP.setBackground(getDrawable(R.drawable.custom_btn_dialog_delete_item_cart_cancel));
@@ -129,57 +132,6 @@ public class UpdatePasswordActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void sendMailOTP(){
-        CustomToast.showSuccessMessage(getApplicationContext(),"Send OTP");
-        Random random = new Random();
-        codeOTP = random.nextInt(8999) + 1000;
-        try {
-            String stringReceiverEmail = customer.getEmail(); // người nhận
-            String stringSenderEmail = "bblojc@gmail.com"; // mail gửi
-            String stringPasswordSenderEmail = "iymujrueonykabhc";
-
-            String stringHost = "smtp.gmail.com";
-
-            Properties properties = System.getProperties();
-
-            properties.put("mail.smtp.host", stringHost);
-            properties.put("mail.smtp.port", "465");
-            properties.put("mail.smtp.ssl.enable", "true");
-            properties.put("mail.smtp.auth", "true");
-
-            javax.mail.Session session = Session.getInstance(properties, new Authenticator() {
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(stringSenderEmail, stringPasswordSenderEmail);
-                }
-            });
-
-            MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(stringReceiverEmail));
-
-            String setText = "Hello, \n\nHere is the verification code. Please coppy it and verify: " + codeOTP;
-            mimeMessage.setSubject("Ecommerce OTP");
-            mimeMessage.setText(setText);
-
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Transport.send(mimeMessage);
-                    } catch (MessagingException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            thread.start();
-
-        } catch (AddressException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
     }
 
     private void setBtnSendWait(){
