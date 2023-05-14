@@ -5,4 +5,5 @@
     <string name="currency"> $</string>
     <string name="dotName">...</string>
     <string name="dotDescription">:</string>
+    <string name="changepassMail">We have send you an One Time Password(OTP) on this mail:\n</string>
 </resources>
