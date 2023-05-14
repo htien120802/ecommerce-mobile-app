@@ -106,45 +106,53 @@
                 app:layout_constraintStart_toEndOf="@+id/textView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvTitleAnswer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:fontFamily="@font/poppins_bold"
-                android:text="Answer:"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/ViewLineAnswer"
-                app:layout_constraintTop_toBottomOf="@+id/tvQuestionn" />
-
-            <TextView
-                android:id="@+id/tvAnswerQuestion"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutAnswer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="96dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/poppins_extralight"
-                android:text="Yes, it's still available"
-                android:textColor="@color/black"
-                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitleAnswer" />
+                app:layout_constraintTop_toBottomOf="@+id/tvQuestionn">
 
-            <TextView
-                android:id="@+id/tvDateAnswer"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/poppins_extralight"
-                android:text="21 june, 2020"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                app:layout_constraintStart_toEndOf="@+id/tvTitleAnswer"
-                app:layout_constraintTop_toBottomOf="@+id/tvQuestionn" />
+                <TextView
+                    android:id="@+id/tvTitleAnswer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Answer:"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvAnswerQuestion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/poppins_extralight"
+                    android:text="Yes, it's still available"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitleAnswer" />
+
+                <TextView
+                    android:id="@+id/tvDateAnswer"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/poppins_extralight"
+                    android:text="21 june, 2020"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@+id/tvTitleAnswer"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
