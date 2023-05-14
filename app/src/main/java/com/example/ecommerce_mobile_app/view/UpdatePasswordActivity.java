@@ -193,8 +193,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                Random random = new Random();
-                codeOTP = random.nextInt(8999) + 1000;
+                codeOTP = 999999999;
                 seconds = 30;
 
                 activityChangePasswordBinding.btnSendOTP.setEnabled(true);
