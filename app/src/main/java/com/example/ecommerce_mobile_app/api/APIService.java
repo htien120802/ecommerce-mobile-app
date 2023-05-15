@@ -8,6 +8,7 @@ import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Order;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.Profile;
+import com.example.ecommerce_mobile_app.model.Question;
 import com.example.ecommerce_mobile_app.model.ShippingAddress;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
@@ -92,4 +93,7 @@ public interface APIService {
 
     @DELETE("api/cart/{customerId}/delete/{productId}")
     Call<BaseResponse<List<WishlistItem>>> deleteWishlist(@Path("customerId") int customerId);
+
+    @GET("api/list_questions_by_product/{productId}")
+    Call<BaseResponse<List<Question>>> getQuestons(@Path("productId") int productId);
 }

@@ -26,9 +26,11 @@ import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Description;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.model.Question;
 import com.example.ecommerce_mobile_app.model.WishlistItem;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
+import com.example.ecommerce_mobile_app.util.QuestionDialog;
 
 
 import java.sql.Time;
@@ -46,6 +48,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Product product;
     private Timer timer;
     private int totalItem;
+
+    private List<Question> questions;
 
     private PrefManager prefManager = new PrefManager(this);
     @Override
@@ -98,6 +102,12 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
+        activityItemDetailsBinding.tvQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getQuestion(product.getId());
+            }
+        });
 
 
     }
@@ -223,6 +233,30 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BaseResponse<List<WishlistItem>>> call, Throwable t) {
+
+            }
+        });
+    }
+    public void getQuestion(int productId){
+        RetrofitClient.getInstance().getQuestons(productId).enqueue(new Callback<BaseResponse<List<Question>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<Question>>> call, Response<BaseResponse<List<Question>>> response) {
+                if (response.isSuccessful())
+                    if (response.body().getResponse_message().equals("Success")){
+                         questions = response.body().getData();
+                        if (questions != null){
+                            QuestionDialog questionDialog = new QuestionDialog(questions);
+                            questionDialog.show(getSupportFragmentManager(),"Questions");
+                        }
+                        else
+                            CustomToast.showFailMessage(getApplicationContext(),"This product has no questions!");
+                    }
+                    else
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<Question>>> call, Throwable t) {
 
             }
         });
