@@ -16,7 +16,10 @@ import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.BoxProductAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentHomeBinding;
+import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.model.WishlistItem;
+import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.example.ecommerce_mobile_app.view.MainActivity;
 
 import java.util.List;
@@ -38,6 +41,7 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding = FragmentHomeBinding.inflate(inflater,container,false);
 
         setListProducts();
+        getListFavProduct();
         fragmentHomeBinding.tvViewAllNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +104,23 @@ public class HomeFragment extends Fragment {
         });
 
 
+    }
+    public void getListFavProduct(){
+        RetrofitClient.getInstance().getWishlist(new PrefManager(getContext()).getCustomer().getId()).enqueue(new Callback<BaseResponse<List<WishlistItem>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<WishlistItem>>> call, Response<BaseResponse<List<WishlistItem>>> response) {
+                if (response.isSuccessful() && response.body().getResponse_message().equals("Success")){
+                    adapterNew.setmListFavProducts(response.body().getData());
+                    adapterPopular.setmListFavProducts(response.body().getData());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<WishlistItem>>> call, Throwable t) {
+
+            }
+        });
     }
 
 }

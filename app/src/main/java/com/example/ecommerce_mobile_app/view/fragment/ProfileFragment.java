@@ -17,6 +17,7 @@ import com.example.ecommerce_mobile_app.view.CustomerDetailActivity;
 import com.example.ecommerce_mobile_app.view.OrderActivity;
 import com.example.ecommerce_mobile_app.view.SignInActivity;
 import com.example.ecommerce_mobile_app.view.UpdatePasswordActivity;
+import com.example.ecommerce_mobile_app.view.WishListActivity;
 
 
 public class ProfileFragment extends Fragment {
@@ -59,7 +60,12 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        fragmentProfileBinding.LayoutWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), WishListActivity.class));
+            }
+        });
         fragmentProfileBinding.LayoutChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

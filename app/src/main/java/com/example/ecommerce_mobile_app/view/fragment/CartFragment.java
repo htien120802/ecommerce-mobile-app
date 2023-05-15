@@ -68,6 +68,7 @@ public class CartFragment extends Fragment {
                     CustomDialog customDialog = new CustomDialog();
                     customDialog.setTitle("ADDRESS SHIPPING");
                     customDialog.setDes("Please fill full your address shipping");
+                    customDialog.setTextPositive("OK");
                     customDialog.setPositiveButton(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

@@ -22,8 +22,11 @@ import com.example.ecommerce_mobile_app.adapter.BoxProductAdapter;
 import com.example.ecommerce_mobile_app.api.CONSTANT;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentStoreBinding;
+import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Category;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.model.WishlistItem;
+import com.example.ecommerce_mobile_app.util.PrefManager;
 
 
 import java.util.List;
@@ -37,8 +40,10 @@ public class StoreFragment extends Fragment {
     FragmentStoreBinding fragmentStoreBinding;
     private List<Category> mListCategories;
     private List<Product> mListProducts;
+
+    private List<WishlistItem> mListFavProducts;
     private CategoryAdapter categoryAdapter;
-    private BoxProductAdapter boxProductAdapter;
+    private BoxProductAdapter boxProductAdapter = new BoxProductAdapter();
     private RecyclerView rcvCategory, rcvProduct;
     private String keySearch = "";
     private String categoryFilter = "All";
@@ -51,6 +56,7 @@ public class StoreFragment extends Fragment {
         rcvProduct = fragmentStoreBinding.rvListItem;
         setListCategories();
         setListProducts();
+        getListFavProduct();
         fragmentStoreBinding.etSearchHome.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -103,7 +109,6 @@ public class StoreFragment extends Fragment {
                 if (response.isSuccessful()){
                     mListProducts = response.body();
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
-                    boxProductAdapter = new BoxProductAdapter();
                     boxProductAdapter.setmListProducts(mListProducts);
                     boxProductAdapter.setContext(getContext());
                     rcvProduct.setLayoutManager(gridLayoutManager);
@@ -118,7 +123,22 @@ public class StoreFragment extends Fragment {
             }
         });
 
-
     }
+    public void getListFavProduct(){
+        RetrofitClient.getInstance().getWishlist(new PrefManager(getContext()).getCustomer().getId()).enqueue(new Callback<BaseResponse<List<WishlistItem>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<WishlistItem>>> call, Response<BaseResponse<List<WishlistItem>>> response) {
+                if (response.isSuccessful() && response.body().getResponse_message().equals("Success")){
+                    mListFavProducts = response.body().getData();
+                    boxProductAdapter.setmListFavProducts(mListFavProducts);
+                }
 
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<WishlistItem>>> call, Throwable t) {
+
+            }
+        });
+    }
 }

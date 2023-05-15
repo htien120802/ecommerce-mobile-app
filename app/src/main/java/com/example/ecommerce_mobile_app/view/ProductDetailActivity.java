@@ -7,20 +7,26 @@ import android.os.Looper;
 import android.preference.Preference;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
+import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.DescriptionAdapter;
 import com.example.ecommerce_mobile_app.adapter.ImageAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityItemDetailsBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
+import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Description;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.model.WishlistItem;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 
@@ -37,17 +43,35 @@ import retrofit2.Response;
 
 public class ProductDetailActivity extends AppCompatActivity {
     ActivityItemDetailsBinding activityItemDetailsBinding;
-    private int productId;
+    private Product product;
     private Timer timer;
     private int totalItem;
+
+    private PrefManager prefManager = new PrefManager(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityItemDetailsBinding = ActivityItemDetailsBinding.inflate(getLayoutInflater());
-        Bundle bundle = getIntent().getExtras();
-        productId = (int) bundle.getSerializable("product_id");
-        getProduct(productId);
+        setContentView(activityItemDetailsBinding.getRoot());
 
+        Bundle bundle = getIntent().getExtras();
+        product = (Product) bundle.getSerializable("product");
+        activityItemDetailsBinding.setProduct(product);
+
+        setImageSlide();
+        setDescription();
+        autoSlideImages();
+
+        activityItemDetailsBinding.btnWishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (product.getIsFav()){
+                    removeWishlistItem();
+                }
+                else
+                    addWishlistItem();
+            }
+        });
         activityItemDetailsBinding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,12 +94,12 @@ public class ProductDetailActivity extends AppCompatActivity {
         activityItemDetailsBinding.btnAddtoCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addCartItem(productId);
+                addCartItem(product.getId());
             }
         });
-        setContentView(activityItemDetailsBinding.getRoot());
 
-        autoSlideImages();
+
+
     }
 
     private void autoSlideImages(){
@@ -112,41 +136,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void getProduct(int productId){
-        RetrofitClient.getInstance().getProductById(productId).enqueue(new Callback<Product>() {
-            @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
-                if (response.isSuccessful()){
-                    Product product = response.body();
-                    activityItemDetailsBinding.setProduct(product);
-
-                    List<Image> images = new ArrayList<>();
-                    images.add(new Image(product.getMainImagePath()));
-                    for (Image image : product.getImages()){
-                        images.add(new Image(image.getImagePath()));
-                    }
-                    totalItem = images.size() - 1; // lấy toltal để làm auto slide
-                    ImageAdapter imageAdapter = new ImageAdapter(getApplicationContext(), images);
-                    activityItemDetailsBinding.viewPagerItemDetails.setAdapter(imageAdapter);
-                    activityItemDetailsBinding.circleIndicator.setViewPager(activityItemDetailsBinding.viewPagerItemDetails);
-                    imageAdapter.registerDataSetObserver(activityItemDetailsBinding.circleIndicator.getDataSetObserver());
-
-                    DescriptionAdapter descriptionAdapter = new DescriptionAdapter();
-                    descriptionAdapter.setList(product.getDetails());
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-                    activityItemDetailsBinding.rvDes.setLayoutManager(linearLayoutManager);
-                    activityItemDetailsBinding.rvDes.setAdapter(descriptionAdapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Product> call, Throwable t) {
-
-            }
-        });
-    }
     public void addCartItem(int prodcutId){
-        RetrofitClient.getInstance().addCartItem(new PrefManager(this).getCustomer().getId(), prodcutId,1).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
+        RetrofitClient.getInstance().addCartItem(prefManager.getCustomer().getId(), prodcutId,1).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
             @Override
             public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
                 if (response.isSuccessful()){
@@ -163,6 +154,75 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<BaseResponse<List<CartItem>>> call, Throwable t) {
+
+            }
+        });
+    }
+    public void setImageSlide(){
+        List<Image> images = new ArrayList<>();
+        images.add(new Image(product.getMainImagePath()));
+        for (Image image : product.getImages()){
+            images.add(new Image(image.getImagePath()));
+        }
+        totalItem = images.size() - 1; // lấy toltal để làm auto slide
+        ImageAdapter imageAdapter = new ImageAdapter(getApplicationContext(), images);
+        activityItemDetailsBinding.viewPagerItemDetails.setAdapter(imageAdapter);
+        activityItemDetailsBinding.circleIndicator.setViewPager(activityItemDetailsBinding.viewPagerItemDetails);
+        imageAdapter.registerDataSetObserver(activityItemDetailsBinding.circleIndicator.getDataSetObserver());
+    }
+    public void setDescription(){
+        DescriptionAdapter descriptionAdapter = new DescriptionAdapter();
+        descriptionAdapter.setList(product.getDetails());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        activityItemDetailsBinding.rvDes.setLayoutManager(linearLayoutManager);
+        activityItemDetailsBinding.rvDes.setAdapter(descriptionAdapter);
+    }
+    @BindingAdapter("setFav")
+    public static void setFav(ImageView imageView, Boolean isFav){
+        if (isFav.equals(true))
+            Glide.with(imageView.getContext()).load(imageView.getContext().getDrawable(R.drawable.icon_love)).into(imageView);
+        else
+            Glide.with(imageView.getContext()).load(imageView.getContext().getDrawable(R.drawable.icon_love2)).into(imageView);
+    }
+
+    public void addWishlistItem(){
+        RetrofitClient.getInstance().addWishlistItem(prefManager.getCustomer().getId(),product.getId()).enqueue(new Callback<BaseResponse<List<WishlistItem>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<WishlistItem>>> call, Response<BaseResponse<List<WishlistItem>>> response) {
+                if (response.isSuccessful())
+                    if (response.body().getResponse_message().equals("Success")){
+                        CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
+                        product.setIsFav(true);
+                    }
+                    else
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
+                else
+                    CustomToast.showFailMessage(getApplicationContext(),"Add to whish list is failure");
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<WishlistItem>>> call, Throwable t) {
+
+            }
+        });
+    }
+    public void removeWishlistItem(){
+        RetrofitClient.getInstance().removeWishlistItem(prefManager.getCustomer().getId(),product.getId()).enqueue(new Callback<BaseResponse<List<WishlistItem>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<WishlistItem>>> call, Response<BaseResponse<List<WishlistItem>>> response) {
+                if (response.isSuccessful())
+                    if (response.body().getResponse_message().equals("Success")){
+                        CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
+                        product.setIsFav(false);
+                    }
+                    else
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
+                else
+                    CustomToast.showFailMessage(getApplicationContext(),"Remove from whish list is failure");
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<WishlistItem>>> call, Throwable t) {
 
             }
         });

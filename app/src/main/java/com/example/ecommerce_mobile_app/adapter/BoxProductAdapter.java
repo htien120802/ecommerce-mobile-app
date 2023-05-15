@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.databinding.ListItemBinding;
 import com.example.ecommerce_mobile_app.model.Product;
+import com.example.ecommerce_mobile_app.model.WishlistItem;
 import com.example.ecommerce_mobile_app.view.ProductDetailActivity;
 
 
@@ -24,7 +25,18 @@ public class BoxProductAdapter extends RecyclerView.Adapter<BoxProductAdapter.Pr
     private List<Product> mListProducts;
     private List<Product> mOldListProducts;
 
+    private List<WishlistItem> mListFavProducts;
+
     private Context context;
+
+    public List<WishlistItem> getmListFavProducts() {
+        return mListFavProducts;
+    }
+
+    public void setmListFavProducts(List<WishlistItem> mListFavProducts) {
+        this.mListFavProducts = mListFavProducts;
+        notifyDataSetChanged();
+    }
 
     public void setmListProducts(List<Product> mListProducts) {
         this.mListProducts = mListProducts;
@@ -53,7 +65,15 @@ public class BoxProductAdapter extends RecyclerView.Adapter<BoxProductAdapter.Pr
             public void onClick(View view) {
                 Intent intent = new Intent(context,ProductDetailActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("product_id",product.getId());
+                product.setIsFav(false);
+                if (mListFavProducts != null)
+                    for (WishlistItem item : mListFavProducts){
+                        if (item.getProduct().getId() == product.getId()){
+                            product.setIsFav(true);
+                            break;
+                        }
+                    }
+                bundle.putSerializable("product",product);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

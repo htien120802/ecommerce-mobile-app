@@ -1,7 +1,14 @@
 package com.example.ecommerce_mobile_app.model;
 
 import android.provider.ContactsContract;
+import android.widget.BaseAdapter;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.Observable;
+import androidx.databinding.ObservableField;
+
+import com.example.ecommerce_mobile_app.BR;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
-public class Product implements Serializable{
+public class Product extends BaseObservable implements Serializable{
     private int id;
     private String name;
     private String shortName;
@@ -31,6 +38,17 @@ public class Product implements Serializable{
     private int averageRating;
     private String mainImagePath;
     private float discountPrice;
+
+    private boolean isFav;
+    @Bindable
+    public boolean getIsFav() {
+        return this.isFav;
+    }
+
+    public void setIsFav(boolean isfav) {
+        this.isFav = isfav;
+        notifyPropertyChanged(BR.isFav);
+    }
 
     public int getId() {
         return id;
