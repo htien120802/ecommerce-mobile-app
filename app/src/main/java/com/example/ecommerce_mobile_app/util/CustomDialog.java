@@ -39,6 +39,12 @@ public class CustomDialog extends DialogFragment {
         btnYes.setOnClickListener(btnYesListener);
         btnCancel.setText(textNega);
         btnCancel.setOnClickListener(btnCancelListener);
+
+        // Set transparent background and no title
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
         return view;
     }
     public void setTitle(String title){

@@ -1,9 +1,16 @@
 package com.example.ecommerce_mobile_app.util;
 
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -46,8 +53,26 @@ public class QuestionDialog extends DialogFragment {
             dismiss();
             CustomToast.showFailMessage(getContext(),"This product has no question!");
         }
+
+        // Set transparent background and no title
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
         return view;
     }
+
+    @Override
+    public void onResume() {
+        Window window = getDialog().getWindow();
+        Point size = new Point();
+        Display display = window.getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+        window.setLayout((int) (size.x * 0.90), WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        super.onResume();
+    }
+
     public void viewBinding(){
         rcv_question = view.findViewById(R.id.rcv_question);
         rcv_question.setLayoutManager(new LinearLayoutManager(getContext()));
