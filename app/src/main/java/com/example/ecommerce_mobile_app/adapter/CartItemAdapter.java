@@ -25,8 +25,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         public void clickProduct(CartItem cartItem);
     }
 
-    public CartItemAdapter(IClickOnCartItem iClickOnCartItem) {
+    public void setiClickOnCartItem(IClickOnCartItem iClickOnCartItem) {
         this.iClickOnCartItem = iClickOnCartItem;
+        notifyDataSetChanged();
     }
 
     public void setmListCartItems(List<CartItem> mListCartItems){

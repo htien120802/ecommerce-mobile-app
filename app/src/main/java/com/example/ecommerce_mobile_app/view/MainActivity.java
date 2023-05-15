@@ -13,6 +13,7 @@ import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.api.CONSTANT;
 import com.example.ecommerce_mobile_app.databinding.ActivityMainBinding;
 import com.example.ecommerce_mobile_app.model.Customer;
+import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.example.ecommerce_mobile_app.view.fragment.CartFragment;
 import com.example.ecommerce_mobile_app.view.fragment.HomeFragment;
@@ -21,11 +22,15 @@ import com.example.ecommerce_mobile_app.view.fragment.StoreFragment;
 import com.google.gson.Gson;
 import com.ismaeldivita.chipnavigation.ChipNavigationBar;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding activityMainBinding;
     Fragment fragment=null;
     ChipNavigationBar chipNavigationBar;
     String change_to = "";
+
+    List<Product> listProducts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,5 +88,4 @@ public class MainActivity extends AppCompatActivity {
         imagePath = CONSTANT.BASE_URL + imagePath.substring(1,imagePath.length());
         Glide.with(shapeableImageView.getContext()).load(imagePath).error(shapeableImageView.getContext().getDrawable(R.drawable.avatarhome1)).into(shapeableImageView);
     }
-
 }

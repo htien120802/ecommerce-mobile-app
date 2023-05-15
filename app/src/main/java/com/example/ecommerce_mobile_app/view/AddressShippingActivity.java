@@ -3,6 +3,7 @@ package com.example.ecommerce_mobile_app.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +18,7 @@ import com.example.ecommerce_mobile_app.databinding.ActivityAddressShippingBindi
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Country;
 import com.example.ecommerce_mobile_app.model.Customer;
+import com.example.ecommerce_mobile_app.model.ShippingAddress;
 import com.example.ecommerce_mobile_app.model.State;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
@@ -46,7 +48,7 @@ public class AddressShippingActivity extends AppCompatActivity {
     Map<Integer,String> mapState = new HashMap<Integer,String>();
     String conutry, state;
     TextView tvState, tvCountry;
-    EditText addLine1, addLine2, city;
+    EditText addLine1, addLine2, city, postalCode;
     Button cancel, edit_save;
     boolean nullAddress;
     boolean isEditting = false;
@@ -56,14 +58,21 @@ public class AddressShippingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityAddressShippingBinding = ActivityAddressShippingBinding.inflate(getLayoutInflater());
         setContentView(activityAddressShippingBinding.getRoot());
+
         customer = prefManager.getCustomer();
-        conutry = customer.getCountry().getName();
+        conutry = customer.getCountry() != null ? customer.getCountry().getName() : "";
         state = customer.getState();
+
         activityAddressShippingBinding.setCustomer(customer);
+
         viewBinding();
+
         nullAddress = customer.getAddressLine1() == null || customer.getAddressLine2() == null || customer.getCity() == null || customer.getCountry() == null;
         if (nullAddress)
             edit_save.setText("Add");
+//        if (customer.getCountry() == null)
+//            customer.setCountry(new Country(-1,""));
+
         edit_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,26 +90,13 @@ public class AddressShippingActivity extends AppCompatActivity {
                     enableEditting(addLine1);
                     enableEditting(addLine2);
                     enableEditting(city);
+                    enableEditting(postalCode);
 
                     getCountry();
 
                 }
                 else {
-                    isEditting = false;
-                    nullAddress = false;
-                    edit_save.setText("Edit");
-                    cancel.setVisibility(View.GONE);
-
-                    textInputLayoutCoutry.setVisibility(View.GONE);
-                    textInputLayoutState.setVisibility(View.GONE);
-                    tvCountry.setVisibility(View.VISIBLE);
-                    tvState.setVisibility(View.VISIBLE);
-
                     updateAddress();
-
-                    disableEditting(addLine1);
-                    disableEditting(addLine2);
-                    disableEditting(city);
                 }
             }
         });
@@ -112,6 +108,8 @@ public class AddressShippingActivity extends AppCompatActivity {
                     edit_save.setText("Add");
                 else
                     edit_save.setText("Edit");
+
+
                 cancel.setVisibility(View.GONE);
 
                 textInputLayoutCoutry.setVisibility(View.GONE);
@@ -123,6 +121,9 @@ public class AddressShippingActivity extends AppCompatActivity {
                 disableEditting(addLine1);
                 disableEditting(addLine2);
                 disableEditting(city);
+                disableEditting(postalCode);
+
+                showPreviousInfo();
             }
         });
         activityAddressShippingBinding.btnBack.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +133,7 @@ public class AddressShippingActivity extends AppCompatActivity {
             }
         });
 
-        //khúc này là state mẫu nè nha
+
         autoCompleteTxtCountry.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -147,7 +148,6 @@ public class AddressShippingActivity extends AppCompatActivity {
             }
         });
 
-        //khúc này là country mẫu nè nha
 
 
 
@@ -156,6 +156,7 @@ public class AddressShippingActivity extends AppCompatActivity {
         addLine1 = activityAddressShippingBinding.etAddress1;
         addLine2 = activityAddressShippingBinding.etAddress2;
         city = activityAddressShippingBinding.etCityAddressShipping;
+        postalCode = activityAddressShippingBinding.etPostalCode;
         tvState = activityAddressShippingBinding.tvShowState;
         tvCountry = activityAddressShippingBinding.tvShowCountry;
         cancel = activityAddressShippingBinding.btnCancel;
@@ -270,6 +271,66 @@ public class AddressShippingActivity extends AppCompatActivity {
         return -1;
     }
     public void updateAddress(){
+        ShippingAddress shippingAddress = new ShippingAddress();
+        shippingAddress.setAddressLine1(addLine1.getText().toString());
+        shippingAddress.setAddressLine2(addLine2.getText().toString());
+        shippingAddress.setCity(city.getText().toString());
+        shippingAddress.setPostalCode(postalCode.getText().toString());
+        shippingAddress.setCountryId(findIdByCountryName(conutry));
+        shippingAddress.setStateId(findIdByStateName(state));
+        Log.e("ERR",shippingAddress.getAddressLine1() + ", " + shippingAddress.getAddressLine2() + ", " + shippingAddress.getCity() + ", "+ shippingAddress.getPostalCode() + ", " + shippingAddress.getCountryId() + ", " + shippingAddress.getStateId());
+        RetrofitClient.getInstance().updateAddress(customer.getId(), shippingAddress).enqueue(new Callback<BaseResponse<String>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().getResponse_message().equals("Success")){
+                        CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
+                        isEditting = false;
+                        nullAddress = false;
+                        edit_save.setText("Edit");
+                        cancel.setVisibility(View.GONE);
 
+                        textInputLayoutCoutry.setVisibility(View.GONE);
+                        textInputLayoutState.setVisibility(View.GONE);
+                        tvCountry.setVisibility(View.VISIBLE);
+                        tvState.setVisibility(View.VISIBLE);
+
+                        disableEditting(addLine1);
+                        disableEditting(addLine2);
+                        disableEditting(city);
+                        disableEditting(postalCode);
+
+                        customer.setAddressLine1(shippingAddress.getAddressLine1());
+                        customer.setAddressLine2(shippingAddress.getAddressLine2());
+                        customer.setPostalCode(shippingAddress.getPostalCode());
+                        customer.setCity(shippingAddress.getCity());
+                        customer.setCountry(new Country(shippingAddress.getCountryId(),conutry));
+                        customer.setState(state);
+                        prefManager.changeCustomer(customer);
+                    }
+                    else {
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
+                    }
+                }
+                else {
+                    CustomToast.showFailMessage(getApplicationContext(),"Update your address is failure");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
+
+            }
+        });
+    }
+    private void showPreviousInfo(){
+        addLine1.setText(customer.getAddressLine1());
+        addLine2.setText(customer.getAddressLine2());
+        city.setText(customer.getCity());
+        postalCode.setText(customer.getPostalCode());
+        conutry = customer.getCountry() != null ? customer.getCountry().getName() : "";
+        autoCompleteTxtCountry.setText(conutry,false);
+        state = customer.getState();
+        autoCompleteTxtState.setText(state,false);
     }
 }

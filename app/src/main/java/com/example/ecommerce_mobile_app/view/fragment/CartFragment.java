@@ -48,7 +48,7 @@ public class CartFragment extends Fragment {
     
     List<CartItem> mListCartItems;
     RecyclerView recyclerView;
-    CartItemAdapter cartItemAdapter;
+    CartItemAdapter cartItemAdapter = new CartItemAdapter();
 
     private final InfoCart infoCart = new InfoCart();
 
@@ -123,7 +123,7 @@ public class CartFragment extends Fragment {
                     assert response.body() != null;
                     if (response.body().getResponse_message().equals("Success")){
                         mListCartItems = response.body().getData();
-                        cartItemAdapter = new CartItemAdapter(new CartItemAdapter.IClickOnCartItem() {
+                        cartItemAdapter.setiClickOnCartItem(new CartItemAdapter.IClickOnCartItem() {
                             @Override
                             public void clickMinus(CartItem cartItem) {
                                 if (cartItem.getQuantity() == 1){

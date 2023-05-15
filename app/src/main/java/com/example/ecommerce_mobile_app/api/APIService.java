@@ -8,6 +8,7 @@ import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Order;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.Profile;
+import com.example.ecommerce_mobile_app.model.ShippingAddress;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
 import com.example.ecommerce_mobile_app.model.State;
@@ -69,6 +70,8 @@ public interface APIService {
     @POST("api/account/{id}/update_password")
     Call<BaseResponse<String>> updatePassword(@Path("id") int id, @Body UpdatePasswordRequest updatePasswordRequest);
 
+    @POST("api/account/{id}/update_address")
+    Call<BaseResponse<String>> updateAddress(@Path("id") int id, @Body ShippingAddress shippingAddress);
     @GET("api/country")
     Call<BaseResponse<List<Country>>> getCountry();
 
