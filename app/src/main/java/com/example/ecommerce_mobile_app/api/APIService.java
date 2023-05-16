@@ -88,7 +88,7 @@ public interface APIService {
     @POST("api/wishlist/{customerId}/add/{productId}")
     Call<BaseResponse<List<WishlistItem>>> addWishlistItem(@Path("customerId") int customerId, @Path("productId") int productId);
 
-    @DELETE("api/cart/{customerId}/remove/{productId}")
+    @DELETE("api/wishlist/{customerId}/remove/{productId}")
     Call<BaseResponse<List<WishlistItem>>> removeWishlistItem(@Path("customerId") int customerId, @Path("productId") int productId);
 
     @DELETE("api/cart/{customerId}/delete/{productId}")
@@ -96,4 +96,7 @@ public interface APIService {
 
     @GET("api/list_questions_by_product/{productId}")
     Call<BaseResponse<List<Question>>> getQuestons(@Path("productId") int productId);
+
+    @POST("api/question/{customerId}/post/{productId}")
+    Call<BaseResponse<String>> sendQuestion(@Path("customerId") int customerId, @Path("productId") int productId, @Body String content);
 }

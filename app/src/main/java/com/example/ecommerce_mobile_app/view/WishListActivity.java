@@ -108,6 +108,7 @@ public class WishListActivity extends AppCompatActivity {
                         CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         wishlistItems.remove(wishlistItem);
                         wishListAdapter.setWishlistItems(wishlistItems);
+                        wishListAdapter.notifyDataSetChanged();
                     }
                     else
                         CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());

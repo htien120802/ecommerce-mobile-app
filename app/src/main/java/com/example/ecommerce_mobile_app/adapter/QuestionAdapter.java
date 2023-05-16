@@ -19,11 +19,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
-        for (int i = 0; i < this.questions.size(); i++)
-            if (this.questions.get(i).getAnswer() == null){
-                this.questions.remove(i);
-                i--;
-            }
+        if (this.questions != null)
+            for (int i = 0; i < this.questions.size(); i++)
+                if (this.questions.get(i).getAnswer() == null){
+                    this.questions.remove(i);
+                    i--;
+                }
         notifyDataSetChanged();
     }
 

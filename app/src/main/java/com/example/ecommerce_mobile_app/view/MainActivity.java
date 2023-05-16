@@ -52,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
             change_to = bundle.getSerializable("change_to").toString();
             if (change_to.equals("cart"))
                 changeFragment(R.id.cart);
-            if (change_to.equals("profile"))
+            else if (change_to.equals("profile"))
                 changeFragment(R.id.profile);
+            else if (change_to.equals("store"))
+                changeFragment(R.id.store);
         }
         chipNavigationBar.setOnItemSelectedListener(new ChipNavigationBar.OnItemSelectedListener() {
             @Override

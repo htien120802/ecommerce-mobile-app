@@ -51,6 +51,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private List<Question> questions;
 
+    boolean hasEditted = false;
+
     private PrefManager prefManager = new PrefManager(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         activityItemDetailsBinding.btnWishlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                hasEditted = !hasEditted;
                 if (product.getIsFav()){
                     removeWishlistItem();
                 }
@@ -105,7 +108,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         activityItemDetailsBinding.tvQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getQuestion(product.getId());
+                QuestionDialog questionDialog = new QuestionDialog(product.getId());
+                questionDialog.show(getSupportFragmentManager(),"Questions");
             }
         });
 
@@ -237,28 +241,5 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
     }
-    public void getQuestion(int productId){
-        RetrofitClient.getInstance().getQuestons(productId).enqueue(new Callback<BaseResponse<List<Question>>>() {
-            @Override
-            public void onResponse(Call<BaseResponse<List<Question>>> call, Response<BaseResponse<List<Question>>> response) {
-                if (response.isSuccessful())
-                    if (response.body().getResponse_message().equals("Success")){
-                         questions = response.body().getData();
-                        if (questions != null){
-                            QuestionDialog questionDialog = new QuestionDialog(questions);
-                            questionDialog.show(getSupportFragmentManager(),"Questions");
-                        }
-                        else
-                            CustomToast.showFailMessage(getApplicationContext(),"This product has no questions!");
-                    }
-                    else
-                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
-            }
 
-            @Override
-            public void onFailure(Call<BaseResponse<List<Question>>> call, Throwable t) {
-
-            }
-        });
-    }
 }

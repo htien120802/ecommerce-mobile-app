@@ -141,4 +141,10 @@ public class StoreFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getListFavProduct();
+    }
 }

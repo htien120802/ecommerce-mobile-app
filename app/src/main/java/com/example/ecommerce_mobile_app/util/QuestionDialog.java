@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,28 +38,35 @@ public class QuestionDialog extends DialogFragment {
     private RecyclerView rcv_question;
     private QuestionAdapter adapter = new QuestionAdapter();
     private List<Question> questions;
-    private TextView tv_title;
 
-    public QuestionDialog(List<Question> questions) {
-        this.questions = questions;
+    private EditText ed_content;
+    private Button btn_send;
+
+    private int productId;
+
+    public QuestionDialog(int productId) {
+        this.productId = productId;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_show_question_product,container,false);
+
+        getQuestion();
         viewBinding();
-        if (adapter.getQuestions().size() == 0)
-        {
-            dismiss();
-            CustomToast.showFailMessage(getContext(),"This product has no question!");
-        }
 
         // Set transparent background and no title
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendQuestion();
+            }
+        });
         return view;
     }
 
@@ -74,11 +82,54 @@ public class QuestionDialog extends DialogFragment {
     }
 
     public void viewBinding(){
+        ed_content = view.findViewById(R.id.etQuestion);
+        btn_send = view.findViewById(R.id.btnSendQuestion);
         rcv_question = view.findViewById(R.id.rcv_question);
         rcv_question.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setQuestions(questions);
         rcv_question.setAdapter(adapter);
-        tv_title = view.findViewById(R.id.tvTitleQuestionLayout);
     }
+    public void getQuestion(){
+        RetrofitClient.getInstance().getQuestons(productId).enqueue(new Callback<BaseResponse<List<Question>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<Question>>> call, Response<BaseResponse<List<Question>>> response) {
+                if (response.isSuccessful())
+                    if (response.body().getResponse_message().equals("Success")){
+                        questions = response.body().getData();
+                        adapter.setQuestions(questions);
+                    }
+                    else
+                        CustomToast.showFailMessage(getContext(),response.body().getResponse_description());
+            }
 
+            @Override
+            public void onFailure(Call<BaseResponse<List<Question>>> call, Throwable t) {
+
+            }
+        });
+    }
+    public void sendQuestion(){
+        RetrofitClient.getInstance().sendQuestion(new PrefManager(getContext()).getCustomer().getId(),productId,ed_content.getText().toString()).enqueue(new Callback<BaseResponse<String>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().getResponse_message().equals("Success")){
+                        CustomToast.showSuccessMessage(getContext(),response.body().getResponse_description());
+                        ed_content.setText("");
+                    }
+                    else {
+                        CustomToast.showFailMessage(getContext(),response.body().getResponse_description());
+                    }
+                }
+                else {
+                    CustomToast.showFailMessage(getContext(),"Sending question is failure!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
+
+            }
+        });
+    }
 }
