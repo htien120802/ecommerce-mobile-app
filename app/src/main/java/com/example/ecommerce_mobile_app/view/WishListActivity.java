@@ -13,6 +13,7 @@ import com.example.ecommerce_mobile_app.databinding.ActivityWishlistBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.WishlistItem;
+import com.example.ecommerce_mobile_app.util.CustomDialog;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 
@@ -57,7 +58,21 @@ public class WishListActivity extends AppCompatActivity {
 
                            @Override
                            public void removeWishItem(WishlistItem wishlistItem) {
-                                removeWishlistItem(wishlistItem);
+                               CustomDialog dialog = new CustomDialog();
+                               dialog.setPositiveButton(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View view) {
+                                       removeWishlistItem(wishlistItem);
+                                       dialog.dismiss();
+                                   }
+                               });
+                               dialog.setNegativeButton(new View.OnClickListener() {
+                                   @Override
+                                   public void onClick(View view) {
+                                       dialog.dismiss();
+                                   }
+                               });
+                               dialog.show(getSupportFragmentManager(),"Delete product");
                            }
                        });
                        activityWishlistBinding.rvWishlist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

@@ -31,6 +31,7 @@ import com.example.ecommerce_mobile_app.model.WishlistItem;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.example.ecommerce_mobile_app.util.QuestionDialog;
+import com.example.ecommerce_mobile_app.util.ReviewDialog;
 
 
 import java.sql.Time;
@@ -48,9 +49,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Product product;
     private Timer timer;
     private int totalItem;
-
-    private List<Question> questions;
-
     boolean hasEditted = false;
 
     private PrefManager prefManager = new PrefManager(this);
@@ -113,7 +111,13 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
-
+        activityItemDetailsBinding.tvReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReviewDialog reviewDialog = new ReviewDialog(product.getId());
+                reviewDialog.show(getSupportFragmentManager(),"Reviews");
+            }
+        });
     }
 
     private void autoSlideImages(){

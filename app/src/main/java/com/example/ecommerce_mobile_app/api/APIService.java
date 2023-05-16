@@ -9,6 +9,8 @@ import com.example.ecommerce_mobile_app.model.Order;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.Profile;
 import com.example.ecommerce_mobile_app.model.Question;
+import com.example.ecommerce_mobile_app.model.Review;
+import com.example.ecommerce_mobile_app.model.SendReviewRequest;
 import com.example.ecommerce_mobile_app.model.ShippingAddress;
 import com.example.ecommerce_mobile_app.model.SignInRequest;
 import com.example.ecommerce_mobile_app.model.SignUpRequest;
@@ -99,4 +101,16 @@ public interface APIService {
 
     @POST("api/question/{customerId}/post/{productId}")
     Call<BaseResponse<String>> sendQuestion(@Path("customerId") int customerId, @Path("productId") int productId, @Body String content);
+
+    @GET("api/list_reviews_by_product/{productId}")
+    Call<BaseResponse<List<Review>>> getReviews(@Path("productId") int productId);
+
+    @GET("api/{customerId}/check_customer_can_review/{productId}")
+    Call<BaseResponse<Boolean>> canReview(@Path("customerId") int customerId, @Path("productId") int productId);
+
+    @GET("api/{customerId}/did_customer_reviewed/{productId}")
+    Call<BaseResponse<Boolean>> hadReview(@Path("customerId") int customerId, @Path("productId") int productId);
+
+    @POST("api/{customerId}/write_review/{productId}")
+    Call<BaseResponse<String>> writeReview(@Path("customerId") int customerId, @Path("productId") int productId, @Body SendReviewRequest sendReviewRequest);
 }

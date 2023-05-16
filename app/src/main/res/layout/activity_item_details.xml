@@ -112,7 +112,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="104dp"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="(10 Review)"
+                            android:text="Review"
                             android:textColor="@color/black"
                             android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="parent"

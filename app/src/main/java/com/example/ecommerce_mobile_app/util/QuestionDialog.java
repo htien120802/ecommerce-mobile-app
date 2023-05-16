@@ -64,7 +64,10 @@ public class QuestionDialog extends DialogFragment {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendQuestion();
+                if (ed_content.getText().toString().equals("") || ed_content.getText().toString().isEmpty())
+                    CustomToast.showFailMessage(getContext(),"Please enter your question!");
+                else
+                    sendQuestion();
             }
         });
         return view;
