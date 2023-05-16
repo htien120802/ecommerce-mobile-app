@@ -1,13 +1,17 @@
 package com.example.ecommerce_mobile_app.util;
 
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -51,7 +55,7 @@ public class ReviewDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_show_review_product,container);
         viewBinding();
-        checkCanWriteReview();
+//        checkCanWriteReview();
         setListReview();
 
         if (getDialog() != null && getDialog().getWindow() != null) {
@@ -70,12 +74,26 @@ public class ReviewDialog extends DialogFragment {
         });
         return view;
     }
+
+    @Override
+    public void onResume() {
+        Window window = getDialog().getWindow();
+        Point size = new Point();
+        Display display = window.getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+        rcv_review.getLayoutParams().height = (int) (size.y * 0.5);
+        window.setLayout((int) (size.x * 0.90), (int) (size.y * 0.85));
+        window.setGravity(Gravity.CENTER);
+        super.onResume();
+    }
+
     public void viewBinding(){
         rcv_review = view.findViewById(R.id.rcv_review);
         ratingBar = view.findViewById(R.id.ratingBar);
         ed_headline = view.findViewById(R.id.etHeadLine);
         ed_comment = view.findViewById(R.id.etReview);
         btn_send = view.findViewById(R.id.btnSendReview);
+
     }
     public void disableView(){
         ratingBar.setVisibility(View.GONE);
