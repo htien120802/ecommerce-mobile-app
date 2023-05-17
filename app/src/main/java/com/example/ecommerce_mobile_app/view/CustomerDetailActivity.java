@@ -199,7 +199,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<BaseResponse<Customer>> call, Response<BaseResponse<Customer>> response) {
                 if (response.isSuccessful()){
-                    if (response.body().getResponse_message().equals("Update Success")){
+                    if (response.body().getResponse_message().equals("Success")){
                         isUpdated = true;
                         CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         isEditting = false;
