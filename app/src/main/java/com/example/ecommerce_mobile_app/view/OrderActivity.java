@@ -19,6 +19,7 @@ import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -61,7 +62,9 @@ public class OrderActivity extends AppCompatActivity {
             public void onResponse(Call<BaseResponse<List<Order>>> call, Response<BaseResponse<List<Order>>> response) {
                 if (response.isSuccessful()){
                     if (response.body().getResponse_message().equals("Success")){
-                        orderAdapter.setmListOrder(response.body().getData());
+                        List<Order> orders = response.body().getData();
+                        Collections.reverse(orders);
+                        orderAdapter.setmListOrder(orders);
                         activityMyOrderBinding.rvMyOrderList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         activityMyOrderBinding.rvMyOrderList.setAdapter(orderAdapter);
                     }

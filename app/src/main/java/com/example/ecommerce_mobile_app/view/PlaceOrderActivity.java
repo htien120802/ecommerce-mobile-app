@@ -10,7 +10,6 @@ import android.view.View;
 
 import com.example.ecommerce_mobile_app.adapter.LineProductAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
-import com.example.ecommerce_mobile_app.asynctask.AsyncPlaceOrder;
 import com.example.ecommerce_mobile_app.databinding.ActivityPlaceOrderBinding;
 import com.example.ecommerce_mobile_app.model.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
