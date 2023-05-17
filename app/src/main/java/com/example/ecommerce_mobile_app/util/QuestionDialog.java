@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,12 +24,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.QuestionAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
+import com.example.ecommerce_mobile_app.model.request.PostQuestionRequest;
 import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Question;
-import com.example.ecommerce_mobile_app.model.request.PostQuestionRequest;
 
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,13 +36,14 @@ import retrofit2.Response;
 
 public class QuestionDialog extends DialogFragment {
     View view;
-    private final QuestionAdapter adapter = new QuestionAdapter();
+    private RecyclerView rcv_question;
+    private QuestionAdapter adapter = new QuestionAdapter();
     private List<Question> questions;
 
     private EditText ed_content;
     private Button btn_send;
 
-    private final int productId;
+    private int productId;
 
     public QuestionDialog(int productId) {
         this.productId = productId;
@@ -61,18 +62,21 @@ public class QuestionDialog extends DialogFragment {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
-        btn_send.setOnClickListener(view -> {
-            if (ed_content.getText().toString().equals("") || ed_content.getText().toString().isEmpty())
-                CustomToast.showFailMessage(getContext(),"Please enter your question!");
-            else
-                sendQuestion();
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ed_content.getText().toString().equals("") || ed_content.getText().toString().isEmpty())
+                    CustomToast.showFailMessage(getContext(),"Please enter your question!");
+                else
+                    sendQuestion();
+            }
         });
         return view;
     }
 
     @Override
     public void onResume() {
-        Window window = Objects.requireNonNull(getDialog()).getWindow();
+        Window window = getDialog().getWindow();
         Point size = new Point();
         Display display = window.getWindowManager().getDefaultDisplay();
         display.getSize(size);
@@ -86,7 +90,7 @@ public class QuestionDialog extends DialogFragment {
     public void viewBinding(){
         ed_content = view.findViewById(R.id.etQuestion);
         btn_send = view.findViewById(R.id.btnSendQuestion);
-        RecyclerView rcv_question = view.findViewById(R.id.rcv_question);
+        rcv_question = view.findViewById(R.id.rcv_question);
         rcv_question.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setQuestions(questions);
         rcv_question.setAdapter(adapter);
