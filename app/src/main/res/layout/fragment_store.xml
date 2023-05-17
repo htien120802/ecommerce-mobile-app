@@ -69,7 +69,7 @@
 
                     <EditText
                         android:id="@+id/etSearchHome"
-                        android:layout_width="260dp"
+                        android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/custom_search"
                         android:ems="10"
@@ -93,14 +93,6 @@
                         android:scaleType="fitXY"
                         app:layout_constraintStart_toStartOf="@+id/etSearchHome"
                         app:layout_constraintTop_toTopOf="@+id/etSearchHome" />
-
-                    <ImageButton
-                        android:id="@+id/btnFiltter"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/icon_filtter"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

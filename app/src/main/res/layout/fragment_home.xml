@@ -54,130 +54,122 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/LayoutScroll"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/LayoutBanner"
+                            android:id="@+id/LayoutBanner2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            tools:layout_editor_absoluteY="20dp">
+                            android:layout_marginStart="20dp"
+                            app:layout_constraintStart_toEndOf="@+id/LayoutBanner1"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/LayoutBanner1"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/imageBanner2"
+                                android:layout_width="260dp"
+                                android:layout_height="160dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/banner_phone"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/borderImageCart" />
 
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/imageBanner1"
-                                    android:layout_width="260dp"
-                                    android:layout_height="160dp"
-                                    android:scaleType="fitXY"
-                                    app:shapeAppearanceOverlay="@style/borderImageCart"
-                                    android:src="@drawable/banner_dell"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/tvSaleOff70"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="28dp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Cell Phones"
+                                android:textColor="@color/white"
+                                android:textSize="20sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                                <TextView
-                                    android:id="@+id/tvSaleOff50"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginTop="28dp"
-                                    android:fontFamily="@font/poppins_bold"
-                                    android:text="Dell Laptop"
-                                    android:textColor="@color/black"
-                                    android:textSize="20sp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/tvSaleOff702"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="On everything today"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                app:layout_constraintStart_toStartOf="@+id/imageBanner2"
+                                app:layout_constraintTop_toBottomOf="@+id/tvSaleOff70" />
 
-                                <TextView
-                                    android:id="@+id/tvSaleSlogan"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginTop="8dp"
-                                    android:fontFamily="@font/poppins_medium"
-                                    android:text="THE POWER TO DO MORE"
-                                    android:textColor="@color/black"
-                                    android:textSize="10sp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/tvSaleOff50" />
+                            <android.widget.Button
+                                android:id="@+id/btnSaleOff70"
+                                android:layout_width="70dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@drawable/custom_btn_primary"
+                                android:text="Get Now"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tvSaleOff702" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                                <android.widget.Button
-                                    android:id="@+id/btnSaleOff50"
-                                    android:layout_width="70dp"
-                                    android:layout_height="25dp"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginTop="12dp"
-                                    android:textColor="@color/white"
-                                    android:background="@drawable/custom_btn_primary"
-                                    android:text="Get Now"
-                                    android:textSize="10sp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/tvSaleSlogan" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/LayoutBanner1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/LayoutBanner2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="15dp"
-                                app:layout_constraintStart_toEndOf="@id/LayoutBanner1"
-                                app:layout_constraintTop_toTopOf="parent">
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/imageBanner1"
+                                android:layout_width="260dp"
+                                android:layout_height="160dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/banner_dell"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:shapeAppearanceOverlay="@style/borderImageCart" />
 
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/imageBanner2"
-                                    android:layout_width="260dp"
-                                    android:layout_height="160dp"
-                                    android:scaleType="fitXY"
-                                    android:src="@drawable/banner_phone"
-                                    app:shapeAppearanceOverlay="@style/borderImageCart"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/tvSaleOff50"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="28dp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Dell Laptop"
+                                android:textColor="@color/black"
+                                android:textSize="20sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
-                                <TextView
-                                    android:id="@+id/tvSaleOff70"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginTop="28dp"
-                                    android:fontFamily="@font/poppins_bold"
-                                    android:text="Cell Phones"
-                                    android:textColor="@color/white"
-                                    android:textSize="20sp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/tvSaleSlogan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:text="THE POWER TO DO MORE"
+                                android:textColor="@color/black"
+                                android:textSize="10sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tvSaleOff50" />
 
-                                <TextView
-                                    android:id="@+id/tvSaleOff702"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginTop="8dp"
-                                    android:fontFamily="@font/poppins_medium"
-                                    android:text="On everything today"
-                                    android:textColor="@color/white"
-                                    android:textSize="10sp"
-                                    app:layout_constraintStart_toStartOf="@+id/imageBanner2"
-                                    app:layout_constraintTop_toBottomOf="@+id/tvSaleOff70" />
-
-                                <android.widget.Button
-                                    android:id="@+id/btnSaleOff70"
-                                    android:layout_width="70dp"
-                                    android:layout_height="25dp"
-                                    android:layout_marginStart="12dp"
-                                    android:layout_marginTop="12dp"
-                                    android:background="@drawable/custom_btn_primary"
-                                    android:text="Get Now"
-                                    android:textColor="@color/white"
-                                    android:textSize="10sp"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/tvSaleOff702" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                            <android.widget.Button
+                                android:id="@+id/btnSaleOff50"
+                                android:layout_width="70dp"
+                                android:layout_height="25dp"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="12dp"
+                                android:background="@drawable/custom_btn_primary"
+                                android:text="Get Now"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tvSaleSlogan" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
