@@ -79,7 +79,9 @@ public class QuestionDialog extends DialogFragment {
         Point size = new Point();
         Display display = window.getWindowManager().getDefaultDisplay();
         display.getSize(size);
-        window.setLayout((int) (size.x * 0.90), WindowManager.LayoutParams.WRAP_CONTENT);
+
+        rcv_question.getLayoutParams().height = (int) (size.y * 0.6);
+        window.setLayout((int) (size.x * 0.90), (int) (size.y * 0.85));
         window.setGravity(Gravity.CENTER);
         super.onResume();
     }
@@ -92,6 +94,18 @@ public class QuestionDialog extends DialogFragment {
         adapter.setQuestions(questions);
         rcv_question.setAdapter(adapter);
     }
+
+    public void disableView(){
+        Window window = getDialog().getWindow();
+        Point size = new Point();
+        Display display = window.getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+
+        window.setLayout((int) (size.x * 0.90), WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setGravity(Gravity.CENTER);
+        rcv_question.setVisibility(View.GONE);
+    }
+
     public void getQuestion(){
         RetrofitClient.getInstance().getQuestons(productId).enqueue(new Callback<BaseResponse<List<Question>>>() {
             @Override
@@ -99,6 +113,9 @@ public class QuestionDialog extends DialogFragment {
                 if (response.isSuccessful())
                     if (response.body().getResponse_message().equals("Success")){
                         questions = response.body().getData();
+                        if(questions.size() == 0){
+                            disableView();
+                        }
                         adapter.setQuestions(questions);
                     }
                     else
