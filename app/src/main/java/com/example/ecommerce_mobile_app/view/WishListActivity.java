@@ -41,6 +41,28 @@ public class WishListActivity extends AppCompatActivity {
                 WishListActivity.super.onBackPressed();
             }
         });
+        activityWishlistBinding.tvClearAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialog customDialog = new CustomDialog();
+                customDialog.setTitle("CLEAR FAVOURITE LIST");
+                customDialog.setDes("Do you want to clear favourite list?");
+                customDialog.setPositiveButton(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        customDialog.dismiss();
+                        clearFavList();
+                    }
+                });
+                customDialog.setNegativeButton(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        customDialog.dismiss();
+                    }
+                });
+                customDialog.show(getSupportFragmentManager(),"Clear fav list");
+            }
+        });
     }
     public void getWishList(){
         RetrofitClient.getInstance().getWishlist(prefManager.getCustomer().getId()).enqueue(new Callback<BaseResponse<List<WishlistItem>>>() {
@@ -129,6 +151,29 @@ public class WishListActivity extends AppCompatActivity {
                         CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
                 else
                     CustomToast.showFailMessage(getApplicationContext(),"Remove from whish list is failure");
+            }
+
+            @Override
+            public void onFailure(Call<BaseResponse<List<WishlistItem>>> call, Throwable t) {
+
+            }
+        });
+    }
+    public void clearFavList(){
+        RetrofitClient.getInstance().deleteWishlist(prefManager.getCustomer().getId()).enqueue(new Callback<BaseResponse<List<WishlistItem>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<WishlistItem>>> call, Response<BaseResponse<List<WishlistItem>>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().getResponse_message().equals("Success")){
+                        CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
+                        wishlistItems.clear();
+                        wishListAdapter.setWishlistItems(wishlistItems);
+                    }
+                    else
+                        CustomToast.showFailMessage(getApplicationContext(),response.body().getResponse_description());
+                }
+                else
+                    CustomToast.showFailMessage(getApplicationContext(),"Clear favourite list is failure!");
             }
 
             @Override

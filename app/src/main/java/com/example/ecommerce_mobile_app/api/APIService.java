@@ -63,7 +63,8 @@ public interface APIService {
 
     @POST("api/cart/{customerId}/add/{productId}/{quantity}")
     Call<BaseResponse<List<CartItem>>> addCartItem(@Path("customerId") int customerId, @Path("productId") int productId, @Path("quantity") int quantity);
-
+    @DELETE("api/cart/{customerId}/delete")
+    Call<BaseResponse<List<CartItem>>> deleteCart(@Path("customerId") int customerId);
     @POST("api/account/{id}/update_info")
     Call<BaseResponse<Customer>> updateInfo(@Path("id") int id, @Body Profile profile);
     @Multipart
@@ -93,7 +94,7 @@ public interface APIService {
     @DELETE("api/wishlist/{customerId}/remove/{productId}")
     Call<BaseResponse<List<WishlistItem>>> removeWishlistItem(@Path("customerId") int customerId, @Path("productId") int productId);
 
-    @DELETE("api/cart/{customerId}/delete/{productId}")
+    @DELETE("api/wishlist/{customerId}/delete")
     Call<BaseResponse<List<WishlistItem>>> deleteWishlist(@Path("customerId") int customerId);
 
     @GET("api/list_questions_by_product/{productId}")

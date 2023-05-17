@@ -59,20 +59,20 @@ public class BoxProductAdapter extends RecyclerView.Adapter<BoxProductAdapter.Pr
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = mListProducts.get(position);
+        product.setIsFav(false);
+        if (mListFavProducts != null)
+            for (WishlistItem item : mListFavProducts){
+                if (item.getProduct().getId() == product.getId()){
+                    product.setIsFav(true);
+                    break;
+                }
+            }
         holder.listItemBinding.setProduct(product);
         holder.listItemBinding.LayoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,ProductDetailActivity.class);
                 Bundle bundle = new Bundle();
-                product.setIsFav(false);
-                if (mListFavProducts != null)
-                    for (WishlistItem item : mListFavProducts){
-                        if (item.getProduct().getId() == product.getId()){
-                            product.setIsFav(true);
-                            break;
-                        }
-                    }
                 bundle.putSerializable("product",product);
                 intent.putExtras(bundle);
                 context.startActivity(intent);

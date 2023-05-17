@@ -112,6 +112,29 @@ public class CartFragment extends Fragment {
                 }
             }
         });
+
+        fragmentCartBinding.tvClearAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomDialog customDialog = new CustomDialog();
+                customDialog.setTitle("CLEAR CART");
+                customDialog.setDes("Do you want to clear your cart?");
+                customDialog.setPositiveButton(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        customDialog.dismiss();
+                        clearCart();
+                    }
+                });
+                customDialog.setNegativeButton(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        customDialog.dismiss();
+                    }
+                });
+                customDialog.show(getActivity().getSupportFragmentManager(),"Clear cart");
+            }
+        });
         return fragmentCartBinding.getRoot();
     }
 
@@ -257,5 +280,28 @@ public class CartFragment extends Fragment {
         String format = String.format("Total: (%d items)",item);
         textView.setText(format);
     }
+    public void clearCart(){
+        RetrofitClient.getInstance().deleteCart(new PrefManager(getContext()).getCustomer().getId()).enqueue(new Callback<BaseResponse<List<CartItem>>>() {
+            @Override
+            public void onResponse(Call<BaseResponse<List<CartItem>>> call, Response<BaseResponse<List<CartItem>>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().getResponse_message().equals("Success")){
+                        CustomToast.showSuccessMessage(getContext(),response.body().getResponse_description());
+                        mListCartItems.clear();
+                        cartItemAdapter.setmListCartItems(mListCartItems);
+                        infoCart.setTotalItem(0);
+                        infoCart.setTotalPrice(0.0f);
+                    }else
+                        CustomToast.showFailMessage(getContext(),response.body().getResponse_description());
+                }
+                else
+                    CustomToast.showFailMessage(getContext(),"Clear cart is failure!");
+            }
 
+            @Override
+            public void onFailure(Call<BaseResponse<List<CartItem>>> call, Throwable t) {
+
+            }
+        });
+    }
 }
