@@ -68,7 +68,7 @@ public interface APIService {
     @POST("api/account/{id}/update_info")
     Call<BaseResponse<Customer>> updateInfo(@Path("id") int id, @Body Profile profile);
     @Multipart
-    @POST("api/account/{id}/update_photo")
+    @POST("api/account/{id}/upload_photo")
     Call<BaseResponse<String>> updatePhoto(@Path("id") int id, @Part MultipartBody.Part file);
 
     @POST("api/account/{id}/update_password")

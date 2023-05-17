@@ -273,7 +273,7 @@ public class CustomerDetailActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     mProgressDialog.dismiss();
                     isUpdated = true;
-                    if (response.body().getResponse_message().equals("Update Success")){
+                    if (response.body().getResponse_message().equals("Success")){
                         CustomToast.showSuccessMessage(getApplicationContext(),response.body().getResponse_description());
                         MainActivity.setImage(avatar,response.body().getData());
                         cancel_upload.setVisibility(View.GONE);
