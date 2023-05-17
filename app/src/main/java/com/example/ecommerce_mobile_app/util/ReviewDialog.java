@@ -18,6 +18,7 @@ import android.widget.RatingBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,7 +42,7 @@ public class ReviewDialog extends DialogFragment {
     private ReviewAdapter reviewAdapter = new ReviewAdapter();
     private EditText ed_headline, ed_comment;
     private RatingBar ratingBar;
-
+    private ConstraintLayout layoutSendReview;
     private Button btn_send;
     private boolean canReview;
     private int productId;
@@ -94,12 +95,21 @@ public class ReviewDialog extends DialogFragment {
         ed_comment = view.findViewById(R.id.etReview);
         btn_send = view.findViewById(R.id.btnSendReview);
 
+        layoutSendReview = view.findViewById(R.id.layoutSendReview);
+
     }
     public void disableView(){
-        ratingBar.setVisibility(View.GONE);
-        ed_headline.setVisibility(View.GONE);
-        ed_comment.setVisibility(View.GONE);
-        btn_send.setVisibility(View.GONE);
+//        ratingBar.setVisibility(View.GONE);
+//        ed_headline.setVisibility(View.GONE);
+//        ed_comment.setVisibility(View.GONE);
+//        btn_send.setVisibility(View.GONE);
+
+        Window window = getDialog().getWindow();
+        Point size = new Point();
+        Display display = window.getWindowManager().getDefaultDisplay();
+        display.getSize(size);
+        rcv_review.getLayoutParams().height = (int) (size.y * 0.75);
+        layoutSendReview.setVisibility(View.GONE);
     }
     public void checkCanWriteReview(){
         int customerId = new PrefManager(getContext()).getCustomer().getId();
