@@ -52,6 +52,12 @@ public class SignInActivity extends AppCompatActivity {
                 finish();
             }
         });
+        activitySignInBinding.tvManager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignInActivity.this,ManagerActivity.class));
+            }
+        });
     }
 
     public void doSignIn(){

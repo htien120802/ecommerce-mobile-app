@@ -55,7 +55,7 @@ public class ReviewDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_show_review_product,container);
         viewBinding();
-//        checkCanWriteReview();
+        checkCanWriteReview();
         setListReview();
 
         if (getDialog() != null && getDialog().getWindow() != null) {

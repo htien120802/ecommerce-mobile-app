@@ -113,4 +113,7 @@ public interface APIService {
 
     @POST("api/{customerId}/write_review/{productId}")
     Call<BaseResponse<String>> writeReview(@Path("customerId") int customerId, @Path("productId") int productId, @Body SendReviewRequest sendReviewRequest);
+
+    @POST("api/{customerId}/place_order")
+    Call<BaseResponse<String>> placeOrder(@Path("customerId") int customerId);
 }

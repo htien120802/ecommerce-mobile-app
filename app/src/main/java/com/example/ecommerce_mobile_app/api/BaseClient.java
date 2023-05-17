@@ -10,8 +10,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BaseClient {
     private static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
-            .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS);
+            .writeTimeout(5,TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
+            .connectTimeout(5, TimeUnit.MINUTES);
     static <S> S createService(Class<S> serviceClass, String baseUrl) {
         Retrofit.Builder builder = new Retrofit.Builder().baseUrl(baseUrl).addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
