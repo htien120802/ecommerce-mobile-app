@@ -34,6 +34,8 @@ public class HomeFragment extends Fragment {
     RecyclerView rcvNew, rcvPopular;
     BoxProductAdapter adapterNew = new BoxProductAdapter(), adapterPopular = new BoxProductAdapter();
     List<Product> mListProducts;
+
+    boolean checkNew, checkPop = true;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,6 +44,35 @@ public class HomeFragment extends Fragment {
 
         setListProducts();
         getListFavProduct();
+
+        fragmentHomeBinding.tvNewArrivals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkNew == true) {
+                    fragmentHomeBinding.rvNewArrivalsHome.setVisibility(View.GONE);
+                    checkNew = false;
+                }
+                else{
+                    fragmentHomeBinding.rvNewArrivalsHome.setVisibility(View.VISIBLE);
+                    checkNew = true;
+                }
+            }
+        });
+
+        fragmentHomeBinding.tvPopular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(checkPop == true) {
+                    fragmentHomeBinding.rvPopularHome.setVisibility(View.GONE);
+                    checkPop = false;
+                }
+                else{
+                    fragmentHomeBinding.rvPopularHome.setVisibility(View.VISIBLE);
+                    checkPop = true;
+                }
+            }
+        });
+
         fragmentHomeBinding.tvViewAllNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
