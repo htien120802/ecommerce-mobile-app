@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityAddressShippingBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Country;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.ShippingAddress;

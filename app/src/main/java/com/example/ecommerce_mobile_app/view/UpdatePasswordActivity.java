@@ -1,42 +1,24 @@
 package com.example.ecommerce_mobile_app.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.chaos.view.PinView;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityChangePasswordBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Customer;
-import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
+import com.example.ecommerce_mobile_app.model.request.UpdatePasswordRequest;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.example.ecommerce_mobile_app.util.SendOTP;
 
-import java.util.Properties;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,14 +80,6 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         activityChangePasswordBinding.btnSubmitChangePW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String inputCode = activityChangePasswordBinding.firstPinView.getText().toString();
-                if (inputCode.equals(String.valueOf(codeOTP))) {
-                    activityChangePasswordBinding.LayoutConfirmOTP.setVisibility(View.GONE);
-                    activityChangePasswordBinding.LayoutEditProfileDetail.setVisibility(View.VISIBLE);
-                    CustomToast.showSuccessMessage(getApplicationContext(),"Successful!");
-                } else {
-                    CustomToast.showFailMessage(getApplicationContext(),"OTP is invalid!");
-                }
             }
         });
     }

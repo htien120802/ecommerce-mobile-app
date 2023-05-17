@@ -16,7 +16,7 @@ import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.BoxProductAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentHomeBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.WishlistItem;
 import com.example.ecommerce_mobile_app.util.PrefManager;

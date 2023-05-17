@@ -1,6 +1,6 @@
 package com.example.ecommerce_mobile_app.api;
 
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Category;
 import com.example.ecommerce_mobile_app.model.Country;
@@ -10,12 +10,13 @@ import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.Profile;
 import com.example.ecommerce_mobile_app.model.Question;
 import com.example.ecommerce_mobile_app.model.Review;
-import com.example.ecommerce_mobile_app.model.SendReviewRequest;
+import com.example.ecommerce_mobile_app.model.request.PostQuestionRequest;
+import com.example.ecommerce_mobile_app.model.request.SendReviewRequest;
 import com.example.ecommerce_mobile_app.model.ShippingAddress;
-import com.example.ecommerce_mobile_app.model.SignInRequest;
-import com.example.ecommerce_mobile_app.model.SignUpRequest;
+import com.example.ecommerce_mobile_app.model.request.SignInRequest;
+import com.example.ecommerce_mobile_app.model.request.SignUpRequest;
 import com.example.ecommerce_mobile_app.model.State;
-import com.example.ecommerce_mobile_app.model.UpdatePasswordRequest;
+import com.example.ecommerce_mobile_app.model.request.UpdatePasswordRequest;
 import com.example.ecommerce_mobile_app.model.WishlistItem;
 
 import java.util.List;
@@ -98,10 +99,10 @@ public interface APIService {
     Call<BaseResponse<List<WishlistItem>>> deleteWishlist(@Path("customerId") int customerId);
 
     @GET("api/list_questions_by_product/{productId}")
-    Call<BaseResponse<List<Question>>> getQuestons(@Path("productId") int productId);
+    Call<BaseResponse<List<Question>>> getQuestions(@Path("productId") int productId);
 
     @POST("api/question/{customerId}/post/{productId}")
-    Call<BaseResponse<String>> sendQuestion(@Path("customerId") int customerId, @Path("productId") int productId, @Body String content);
+    Call<BaseResponse<String>> sendQuestion(@Path("customerId") int customerId, @Path("productId") int productId, @Body PostQuestionRequest questionRequest);
 
     @GET("api/list_reviews_by_product/{productId}")
     Call<BaseResponse<List<Review>>> getReviews(@Path("productId") int productId);

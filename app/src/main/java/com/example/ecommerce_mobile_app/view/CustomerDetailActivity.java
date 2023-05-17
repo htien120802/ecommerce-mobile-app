@@ -23,7 +23,7 @@ import android.widget.EditText;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityPersonalDetailsBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Profile;
 import com.example.ecommerce_mobile_app.util.CustomToast;

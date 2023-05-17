@@ -13,7 +13,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,10 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.QuestionAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Question;
+import com.example.ecommerce_mobile_app.model.request.PostQuestionRequest;
 
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,14 +36,13 @@ import retrofit2.Response;
 
 public class QuestionDialog extends DialogFragment {
     View view;
-    private RecyclerView rcv_question;
-    private QuestionAdapter adapter = new QuestionAdapter();
+    private final QuestionAdapter adapter = new QuestionAdapter();
     private List<Question> questions;
 
     private EditText ed_content;
     private Button btn_send;
 
-    private int productId;
+    private final int productId;
 
     public QuestionDialog(int productId) {
         this.productId = productId;
@@ -61,21 +61,18 @@ public class QuestionDialog extends DialogFragment {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (ed_content.getText().toString().equals("") || ed_content.getText().toString().isEmpty())
-                    CustomToast.showFailMessage(getContext(),"Please enter your question!");
-                else
-                    sendQuestion();
-            }
+        btn_send.setOnClickListener(view -> {
+            if (ed_content.getText().toString().equals("") || ed_content.getText().toString().isEmpty())
+                CustomToast.showFailMessage(getContext(),"Please enter your question!");
+            else
+                sendQuestion();
         });
         return view;
     }
 
     @Override
     public void onResume() {
-        Window window = getDialog().getWindow();
+        Window window = Objects.requireNonNull(getDialog()).getWindow();
         Point size = new Point();
         Display display = window.getWindowManager().getDefaultDisplay();
         display.getSize(size);
@@ -89,7 +86,7 @@ public class QuestionDialog extends DialogFragment {
     public void viewBinding(){
         ed_content = view.findViewById(R.id.etQuestion);
         btn_send = view.findViewById(R.id.btnSendQuestion);
-        rcv_question = view.findViewById(R.id.rcv_question);
+        RecyclerView rcv_question = view.findViewById(R.id.rcv_question);
         rcv_question.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.setQuestions(questions);
         rcv_question.setAdapter(adapter);
@@ -107,10 +104,11 @@ public class QuestionDialog extends DialogFragment {
     }
 
     public void getQuestion(){
-        RetrofitClient.getInstance().getQuestons(productId).enqueue(new Callback<BaseResponse<List<Question>>>() {
+        RetrofitClient.getInstance().getQuestions(productId).enqueue(new Callback<BaseResponse<List<Question>>>() {
             @Override
-            public void onResponse(Call<BaseResponse<List<Question>>> call, Response<BaseResponse<List<Question>>> response) {
-                if (response.isSuccessful())
+            public void onResponse(@NonNull Call<BaseResponse<List<Question>>> call, @NonNull Response<BaseResponse<List<Question>>> response) {
+                if (response.isSuccessful()) {
+                    assert response.body() != null;
                     if (response.body().getResponse_message().equals("Success")){
                         questions = response.body().getData();
                         if(questions.size() == 0){
@@ -120,19 +118,23 @@ public class QuestionDialog extends DialogFragment {
                     }
                     else
                         CustomToast.showFailMessage(getContext(),response.body().getResponse_description());
+                }
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<List<Question>>> call, Throwable t) {
+            public void onFailure(@NonNull Call<BaseResponse<List<Question>>> call, @NonNull Throwable t) {
 
             }
         });
     }
     public void sendQuestion(){
-        RetrofitClient.getInstance().sendQuestion(new PrefManager(getContext()).getCustomer().getId(),productId,ed_content.getText().toString()).enqueue(new Callback<BaseResponse<String>>() {
+        PostQuestionRequest postQuestionRequest = new PostQuestionRequest();
+        postQuestionRequest.setQuestionContent(ed_content.getText().toString());
+        RetrofitClient.getInstance().sendQuestion(new PrefManager(getContext()).getCustomer().getId(),productId,postQuestionRequest).enqueue(new Callback<BaseResponse<String>>() {
             @Override
-            public void onResponse(Call<BaseResponse<String>> call, Response<BaseResponse<String>> response) {
+            public void onResponse(@NonNull Call<BaseResponse<String>> call, @NonNull Response<BaseResponse<String>> response) {
                 if (response.isSuccessful()){
+                    assert response.body() != null;
                     if (response.body().getResponse_message().equals("Success")){
                         CustomToast.showSuccessMessage(getContext(),response.body().getResponse_description());
                         ed_content.setText("");
@@ -147,7 +149,7 @@ public class QuestionDialog extends DialogFragment {
             }
 
             @Override
-            public void onFailure(Call<BaseResponse<String>> call, Throwable t) {
+            public void onFailure(@NonNull Call<BaseResponse<String>> call, @NonNull Throwable t) {
 
             }
         });

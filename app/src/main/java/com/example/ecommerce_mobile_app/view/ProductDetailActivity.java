@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.Preference;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
@@ -20,13 +17,10 @@ import com.example.ecommerce_mobile_app.adapter.DescriptionAdapter;
 import com.example.ecommerce_mobile_app.adapter.ImageAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityItemDetailsBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
-import com.example.ecommerce_mobile_app.model.Customer;
-import com.example.ecommerce_mobile_app.model.Description;
 import com.example.ecommerce_mobile_app.model.Image;
 import com.example.ecommerce_mobile_app.model.Product;
-import com.example.ecommerce_mobile_app.model.Question;
 import com.example.ecommerce_mobile_app.model.WishlistItem;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
@@ -34,7 +28,6 @@ import com.example.ecommerce_mobile_app.util.QuestionDialog;
 import com.example.ecommerce_mobile_app.util.ReviewDialog;
 
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;

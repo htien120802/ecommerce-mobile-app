@@ -4,14 +4,12 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -26,9 +24,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.ReviewAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Review;
-import com.example.ecommerce_mobile_app.model.SendReviewRequest;
+import com.example.ecommerce_mobile_app.model.request.SendReviewRequest;
 
 import java.util.List;
 

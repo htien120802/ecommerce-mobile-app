@@ -10,15 +10,13 @@ import android.view.View;
 import com.example.ecommerce_mobile_app.adapter.OrderAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityMyOrderBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.Order;
-import com.example.ecommerce_mobile_app.model.OrderDetail;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
 import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 

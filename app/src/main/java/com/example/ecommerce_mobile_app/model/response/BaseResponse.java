@@ -1,4 +1,4 @@
-package com.example.ecommerce_mobile_app.model;
+package com.example.ecommerce_mobile_app.model.response;
 
 import java.io.Serializable;
 

@@ -6,16 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivitySignInBinding;
 import com.example.ecommerce_mobile_app.model.Customer;
-import com.example.ecommerce_mobile_app.model.SignInRequest;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.request.SignInRequest;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 import com.example.ecommerce_mobile_app.util.PrefManager;
-import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;

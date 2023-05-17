@@ -4,14 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +18,7 @@ import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.CartItemAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentCartBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.Customer;
 import com.example.ecommerce_mobile_app.model.InfoCart;
@@ -34,7 +31,6 @@ import com.example.ecommerce_mobile_app.view.PlaceOrderActivity;
 import com.example.ecommerce_mobile_app.view.ProductDetailActivity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

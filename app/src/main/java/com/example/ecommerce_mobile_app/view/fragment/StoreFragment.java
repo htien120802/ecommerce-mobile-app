@@ -2,7 +2,6 @@ package com.example.ecommerce_mobile_app.view.fragment;
 
 import android.os.Bundle;
 
-import androidx.databinding.BindingAdapter;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,16 +12,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.example.ecommerce_mobile_app.R;
 import com.example.ecommerce_mobile_app.adapter.CategoryAdapter;
 import com.example.ecommerce_mobile_app.adapter.BoxProductAdapter;
-import com.example.ecommerce_mobile_app.api.CONSTANT;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.FragmentStoreBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Category;
 import com.example.ecommerce_mobile_app.model.Product;
 import com.example.ecommerce_mobile_app.model.WishlistItem;

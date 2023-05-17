@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivitySignUpBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.Customer;
-import com.example.ecommerce_mobile_app.model.SignUpRequest;
+import com.example.ecommerce_mobile_app.model.request.SignUpRequest;
 import com.example.ecommerce_mobile_app.util.CustomToast;
 
 import retrofit2.Call;

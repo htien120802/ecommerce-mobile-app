@@ -4,13 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import com.example.ecommerce_mobile_app.adapter.WishListAdapter;
 import com.example.ecommerce_mobile_app.api.RetrofitClient;
 import com.example.ecommerce_mobile_app.databinding.ActivityWishlistBinding;
-import com.example.ecommerce_mobile_app.model.BaseResponse;
+import com.example.ecommerce_mobile_app.model.response.BaseResponse;
 import com.example.ecommerce_mobile_app.model.CartItem;
 import com.example.ecommerce_mobile_app.model.WishlistItem;
 import com.example.ecommerce_mobile_app.util.CustomDialog;
@@ -19,7 +18,6 @@ import com.example.ecommerce_mobile_app.util.PrefManager;
 
 import java.util.List;
 
-import kotlin.jvm.internal.PackageReference;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
