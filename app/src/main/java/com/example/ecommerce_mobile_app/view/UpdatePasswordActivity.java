@@ -81,6 +81,14 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         activityChangePasswordBinding.btnSubmitChangePW.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String inputCode = activityChangePasswordBinding.firstPinView.getText().toString();
+                if (inputCode.equals(String.valueOf(codeOTP))) {
+                    activityChangePasswordBinding.LayoutConfirmOTP.setVisibility(View.GONE);
+                    activityChangePasswordBinding.LayoutEditProfileDetail.setVisibility(View.VISIBLE);
+                    CustomToast.showSuccessMessage(getApplicationContext(),"Successful!");
+                } else {
+                    CustomToast.showFailMessage(getApplicationContext(),"OTP is invalid!");
+                }
             }
         });
     }
