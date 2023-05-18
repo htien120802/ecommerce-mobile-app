@@ -37,6 +37,7 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     private static final long START_TIME_IN_MILLIS = 30000;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
 
+
     private int seconds;
     private int codeOTP;
     @Override

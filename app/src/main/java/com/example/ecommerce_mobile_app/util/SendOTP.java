@@ -13,6 +13,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendOTP {
+
     public static void sendMailOtp(int codeOTP, String customerMail){
         try {
             String stringReceiverEmail = customerMail; // người nhận
